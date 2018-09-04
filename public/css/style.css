@@ -1,0 +1,122 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    margin-top: 48px;
+    color: #533985;
+    background: #edeef0;
+}
+
+h1 {
+    font-size: 2em;
+    padding-bottom: 16px;
+    text-align: center;
+}
+
+h2 {
+    font-size: 1.5em;
+}
+
+h3 {
+    font-size: 1.3em;
+    padding-bottom: 8px;
+}
+
+nav,
+section > article > div,
+section > aside > div,
+footer {
+    background-color: #f8f9fa;
+    margin-bottom: 16px;
+    padding: 1em 1em 0 1em;
+    border: 1px solid #e2e2e4;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+}
+
+div > ul > a {
+    margin-bottom: 4px;
+    border: 1px solid transparent;
+}
+
+nav > ul > li {
+    padding: 0 8px;
+    margin: 0 2px;
+}
+
+nav > ul > li.active {
+    background-color: white;
+    -webkit-border-radius: 8px/32px;
+    -moz-border-radius: 8px/32px;
+    border-radius: 8px/32px;
+}
+
+div > img {
+    border: 1px solid #edeef0;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    border-radius: 12px;
+    margin-bottom: 16px;
+}
+
+div > img:hover {
+    border: 1px solid #e2e2e4;
+}
+
+div > ul > a:hover {
+    border: 1px solid #e2e2e4;
+    text-decoration: none;
+}
+
+a.none {
+    text-decoration: none;
+    color: inherit;
+}
+
+.asidetitle {
+    font-size: 1.2em;
+    font-weight: bold;
+    text-align: center;
+}
+
+.list-group {
+    margin-bottom: 16px;
+}
+
+.datepost {
+    font-weight: none;
+    color: slategrey;
+    font-size: 0.9em;
+}
+
+.formcomment {
+    padding-bottom: 16px;
+}
+
+.formcomment > div:first-child {
+    padding-bottom: 12px;
+}
+
+#go-top {
+    color: white;
+    background-color: slategrey;
+    display: none;
+    text-decoration: none;
+    position: fixed;
+    bottom: 13px;
+    right: 13px;
+    padding: 0.7em 0.9em;
+    z-index: 51;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    -moz-box-shadow: 2px 2px 6px 4px #ccc;
+    -webkit-box-shadow: 2px 2px 6px 4px #ccc;
+    box-shadow: 2px 2px 6px 4px #ccc;
+}
+
+#go-top:hover {
+    color: slategrey;
+    background-color: #e2e2e4;
+}
