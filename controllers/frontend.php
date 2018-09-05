@@ -3,6 +3,7 @@
 require_once('models/config.php');
 require_once('models/BlogManager.php');
 require_once('models/PostManager.php');
+require_once('models/ContactManager.php');
 
 function showBlog($pageId, $catId = '')
 {
@@ -54,14 +55,24 @@ function addComment($postId, $mail, $author, $comment)
 
 function showAbout()
 {
-
-
     require('views/frontend/aboutView.php');
 }
 
-function showContact()
+function showContact($status = '')
 {
-
+    $contactManager = new \OpenClassrooms\Projet4\Blog\ContactManager();
+    
+    $setStatus = $contactManager->setStatus($status);
+    $status = $contactManager->getStatus();
 
     require('views/frontend/contactView.php');
+}
+
+function sendMail($subject, $comment, $mail)
+{
+    $contactManager = new \OpenClassrooms\Projet4\Blog\ContactManager();
+    
+    $startSend = $contactManager->sendMail($subject, $comment, $mail);
+    
+    header('Location: index.php?page=contact&status=sended');
 }

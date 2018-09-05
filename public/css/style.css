@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+@import url(//fonts.googleapis.com/css?family=Open+Sans);
 
 body {
     font-family: 'Open Sans', sans-serif;
@@ -90,12 +90,12 @@ a.none {
     font-size: 0.9em;
 }
 
-.formcomment {
-    padding-bottom: 16px;
-}
-
 .formcomment > div:first-child {
     padding-bottom: 12px;
+}
+
+.formcomment > button {
+    margin-bottom: 16px;
 }
 
 #go-top {
