@@ -33,7 +33,11 @@ try {
         elseif ($_GET['page'] == 'addComment') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 if (!empty($_POST['mail']) && !empty($_POST['author']) && !empty($_POST['comment'])) {
-                    addComment($_GET['id'], $_POST['mail'], $_POST['author'], $_POST['comment']);
+                    if(verify_mail($_POST['mail'])) {
+                        addComment($_GET['id'], $_POST['mail'], $_POST['author'], $_POST['comment']);
+                    } else {
+                        throw new Exception('Votre mail est incorrect');
+                    }
                 }
                 else {
                     throw new Exception('Tous les champs ne sont pas remplis !');

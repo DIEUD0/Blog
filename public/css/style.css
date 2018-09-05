@@ -120,3 +120,8 @@ a.none {
     color: slategrey;
     background-color: #e2e2e4;
 }
+
+.spam {
+    font-size: 0.9em;
+    color: red;
+}

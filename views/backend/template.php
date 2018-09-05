@@ -13,7 +13,7 @@
         <link rel="icon" type="image/x-icon" href="./public/images/favicon.ico" />
         <!--[if IE]><link rel="shortcut icon" type="image/x-icon" href="./public/images/favicon.ico" /><![endif]-->
         <meta name="description" content="Blog pour écrivain....">
-        <?= $tinyMce ?>
+        <script src="//cloud.tinymce.com/stable/tinymce.min.js"></script>
     </head>
 
     <body>
