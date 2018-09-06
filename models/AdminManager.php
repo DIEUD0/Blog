@@ -13,6 +13,19 @@ class AdminManager extends Manager
         $this->_db = $this->dbConnect();
     }
 
+    public function getCategorySideBar()
+    {
+        $req = $this->_db->query('
+        SELECT c.id, c.name, COUNT(b.categorie) total
+        FROM categorie c
+        LEFT JOIN blog b
+        ON c.id = b.categorie
+        GROUP BY c.id, c.name
+        ');
+
+        return $req;
+    }
+
     public function addCategory()
     {
         

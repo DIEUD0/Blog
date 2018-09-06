@@ -19,57 +19,27 @@
 <body>
     <div class="container">
         <header>
-            <h1>
-                Administration
-            </h1>
+            <h1>Administration du blog</h1>
         </header>
 
         <nav class="navbar navbar-expand navbar-light bg-light">
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item
                            <?php
-    if (empty($_GET['page']) || $_GET['page'] == 'blog' || $_GET['page'] == 'category' || $_GET['page'] == 'post') {
-        echo ' active';
-    }
-                           ?>
-                           ">
-                    <a class="nav-link" href="index.php">Blog
-                        <?php
-                        if (empty($_GET['page']) || $_GET['page'] == 'blog' || $_GET['page'] == 'category' || $_GET['page'] == 'post') {
-                            echo ' <span class="sr-only">(Page actuelle)</span>';
-                        }
-                        ?></a>
-                </li>
-                <li class="nav-item
-                           <?php
-                           if (isset($_GET['page']) && $_GET['page'] == 'about') {
+                           if (isset($_GET['page']) && $_GET['page'] == 'admin') {
                                echo ' active';
                            }
                            ?>
                            ">
-                    <a class="nav-link" href="index.php?page=about">À propos
+                    <a class="nav-link" href="index.php?page=admin">Accueil
                         <?php
-                        if (isset($_GET['page']) && $_GET['page'] == 'about') {
+                        if (isset($_GET['page']) && $_GET['page'] == 'admin') {
                             echo ' <span class="sr-only">(Page actuelle)</span>';
                         }
                         ?>
                     </a>
                 </li>
-                <li class="nav-item
-                           <?php
-                           if (isset($_GET['page']) && $_GET['page'] == 'contact') {
-                               echo ' active';
-                           }
-                           ?>
-                           ">
-                    <a class="nav-link" href="index.php?page=contact">Contact
-                        <?php
-                        if (isset($_GET['page']) && $_GET['page'] == 'contact') {
-                            echo ' <span class="sr-only">(Page actuelle)</span>';
-                        }
-                        ?>
-                    </a>
-                </li>
+                <li class="nav-item"><a class="nav-link" href="index.php?page=logout">Déconnexion</a></li>
             </ul>
         </nav>
 

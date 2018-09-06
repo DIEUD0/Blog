@@ -69,6 +69,10 @@ div > ul > a:hover {
     text-decoration: none;
 }
 
+tr > td > a {
+    margin-bottom: 4px;
+}
+
 a.none {
     text-decoration: none;
     color: inherit;
@@ -99,8 +103,7 @@ a.none {
 }
 
 .article {
-    margin-top: 8px;
-    margin-bottom: 16px;
+    margin-bottom: 8px;
 }
 
 #go-top {

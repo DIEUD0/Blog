@@ -55,7 +55,7 @@ try {
                 throw new Exception('Tous les champs ne sont pas remplis !');
             }
         } elseif ($_GET['page'] == 'admin') {
-            showAdmin();
+            showAdmin(1);
         }
     } else {
         showBlog(1);

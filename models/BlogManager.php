@@ -11,6 +11,7 @@ class BlogManager extends Manager
     private $_categoryId;
     private $_postsPerPage;
     private $_totalPosts;
+    private $_adminView;
 
     public function __construct()
     {
@@ -27,6 +28,12 @@ class BlogManager extends Manager
     public function setCategoryId($parameter)
     {
         $this->_categoryId = (int) $parameter;
+    }
+
+    public function setAdminView()
+    {
+        $this->_adminView = true;
+        $this->_postsPerPage =  $this->_postsPerPage * 2;
     }
 
     public function setTotalPosts()
