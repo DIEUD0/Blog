@@ -98,6 +98,11 @@ a.none {
     margin-bottom: 16px;
 }
 
+.article {
+    margin-top: 8px;
+    margin-bottom: 16px;
+}
+
 #go-top {
     color: white;
     background-color: slategrey;

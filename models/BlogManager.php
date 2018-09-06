@@ -31,12 +31,11 @@ class BlogManager extends Manager
 
     public function setTotalPosts()
     {
-        if (empty($this->_categoryId)) { 
+        if (empty($this->_categoryId)) {
             $req = $this->_db->query('SELECT COUNT(*) AS totalposts FROM blog');
             $data = $req->fetch();
 
             $this->_totalPosts = $data['totalposts'];
-
         } else {
             $req = $this->_db->query('SELECT COUNT(*) AS totalposts FROM blog WHERE categorie = ' . $this->_categoryId);
             $data = $req->fetch();
@@ -70,13 +69,14 @@ class BlogManager extends Manager
     public function getPosts()
     {
         $firstMessageToShow = ($this->_parameter - 1) * $this->_postsPerPage;
-        if (empty($this->_categoryId)) { 
-            $req = $this->_db->query('SELECT id, title, post, DATE_FORMAT(post_date, \'%d/%m/%Y\') AS creation_date_fr FROM blog ORDER BY id DESC LIMIT ' . $firstMessageToShow .' , ' . $this->_postsPerPage);
+        if (empty($this->_categoryId)) {
+            $req = $this->_db->query('SELECT id, title, post, DATE_FORMAT(post_date, \'%d/%m/%Y\') AS creation_date_fr FROM blog 
+            ORDER BY id DESC LIMIT ' . $firstMessageToShow .' , ' . $this->_postsPerPage);
 
             return $req;
-
         } else {
-            $req = $this->_db->query('SELECT id, title, post, DATE_FORMAT(post_date, \'%d/%m/%Y\') AS creation_date_fr FROM blog WHERE categorie = ' . $this->_categoryId . ' ORDER BY id DESC LIMIT ' . $firstMessageToShow .' , ' . $this->_postsPerPage);
+            $req = $this->_db->query('SELECT id, title, post, DATE_FORMAT(post_date, \'%d/%m/%Y\') AS creation_date_fr FROM blog 
+            WHERE categorie = ' . $this->_categoryId . ' ORDER BY id DESC LIMIT ' . $firstMessageToShow .' , ' . $this->_postsPerPage);
 
             return $req;
         }
@@ -84,11 +84,11 @@ class BlogManager extends Manager
 
     public function getCategoryName()
     {
-        if (!empty($this->_categoryId)) { 
-        $req = $this->_db->query('SELECT name FROM categorie WHERE id = ' . $this->_categoryId);
-        $data = $req->fetch();
+        if (!empty($this->_categoryId)) {
+            $req = $this->_db->query('SELECT name FROM categorie WHERE id = ' . $this->_categoryId);
+            $data = $req->fetch();
 
-        return $data['name'];
+            return $data['name'];
         }
     }
 
@@ -107,12 +107,11 @@ class BlogManager extends Manager
 
     public function getTotalComments()
     {
-        if (empty($this->_categoryId)) { 
+        if (empty($this->_categoryId)) {
             $req = $this->_db->query('SELECT COUNT(*) AS numbercomments FROM comment');
             $data = $req->fetch();
 
             return $data['numbercomments'];
-
         } else {
             $req = $this->_db->query('
             SELECT COUNT(*) total

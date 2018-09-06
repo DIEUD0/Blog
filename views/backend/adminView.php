@@ -1,35 +1,103 @@
 <?php $title = 'Administration'; ?>
 
 <?php ob_start(); ?>
-<article class="col-md-12">
+
+<aside class="col-md-4">
+
     <div>
-        <h2 class="text-center">
-            A propos...
-        </h2>
+        <p class="asidetitle">Catégories</p>
+        <ul class="list-group">
+            <?php
+            while ($category = $catSidebar->fetch()) {
+                ?>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <a href="#">
+                    <i class="fa fa-times text-danger" aria-hidden="true"></i>
+                </a>
+                <?= $category['name'] ?>
+                <span class="badge badge-pill badge-primary">
+                    <?= $category['total'] ?>
+                </span>
+            </li>
+            <?php
+            }
+            $catSidebar->closeCursor();
+            ?>
+        </ul>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Ajouter une catégorie" aria-label="Ajouter une catégorie"
+                aria-describedby="basic-addon2">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button">+</button>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <p class="asidetitle">Spam</p>
         <p>
-            Donec varius et turpis convallis tincidunt. Fusce vulputate, mauris in vestibulum placerat, ante justo iaculis est, ut accumsan lectus velit id nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Fusce sit amet nisi sit amet nisi imperdiet elementum. Phasellus tortor dolor, aliquet sit amet posuere eu, viverra vel eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Ut sollicitudin consequat nisl, nec consequat ante accumsan non. Sed volutpat dolor id felis dapibus, vitae sodales nulla posuere. Morbi in ligula nulla.
-        </p>
-        <p>
-            Morbi mi justo, dictum eget mollis nec, venenatis vitae magna. Maecenas maximus massa at neque pulvinar placerat. Ut a interdum dui. Maecenas congue erat vitae mauris faucibus, et consequat dui facilisis. Donec pulvinar mauris posuere, sagittis ipsum at, bibendum tellus. Sed at consequat mi. In urna magna, tempor nec quam ut, sodales sagittis tortor. Nunc pharetra feugiat laoreet. Praesent convallis ac orci eu euismod.
+            Aucun signalement pour le moment
         </p>
     </div>
+
     <div>
-        <h2 class="text-center">
-            Bibliographie
-        </h2>
-        <p>
-            Proin non velit nibh. Suspendisse id ipsum scelerisque, sollicitudin nunc ac, convallis tortor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse in rhoncus purus. Integer ut quam ut elit imperdiet viverra vel a tellus. Mauris purus dui, laoreet quis porta vitae, congue vel orci. Nullam consectetur mollis lorem, sit amet mollis tortor. Ut sed varius purus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec auctor massa eu sagittis venenatis. Donec sed sem sed nisl interdum rutrum ac at mauris. Donec vulputate convallis nunc et viverra. Pellentesque placerat diam quis dignissim luctus. Nam nec ultricies erat, eget fermentum mi.
+        <p class="asidetitle">
+            <?php
+            if (!empty($categoryId)) {
+                echo $categoryName.' :';
+            } else {
+                echo 'Statistiques';
+            }
+            ?>
+        </p>
+        <p><i class="far fa-newspaper"></i> &nbsp;
+            <?= $totalPosts . ' article';
+            if ($totalPosts > 1) {
+                echo 's';
+            } ?>
+        </p>
+        <p><i class="fas fa-comment"></i> &nbsp;
+            <?= $totalComments . ' commentaire';
+            if ($totalComments > 1) {
+                echo 's';
+            } ?>
         </p>
     </div>
+</aside>
+<article class="col-md-8 text-center">
     <div>
-        <h2 class="text-center">
-            Filmographie
+        <h2 class="">
+            Vos billets
         </h2>
-        <p>
-            Pellentesque nulla orci, congue sed magna id, ultricies condimentum metus. Curabitur laoreet lacinia odio vitae scelerisque. Praesent leo ligula, luctus id neque eget, hendrerit porttitor metus. Phasellus at dapibus metus, vitae consectetur arcu. Quisque eget lectus viverra, euismod elit aliquam, varius lectus. Quisque scelerisque cursus nisi vitae efficitur. Quisque sit amet aliquam urna, vitae interdum diam. Ut et est orci. Ut vel purus lectus. Etiam pretium elit eu consectetur molestie. Fusce commodo mauris ante, sed ultricies augue volutpat vel. Fusce fermentum luctus pharetra.
-        </p>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col"># - Cat</th>
+                        <th scope="col">Titre</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1 - Sans catégorie</th>
+                        <td>MarkMarkMarrk Mark</td>
+                        <td>2018-08-18</td>
+                        <td>Voir <br /> Modifier <br /> Supprimer</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2 - Sans catégorie</th>
+                        <td>Jacob</td>
+                        <td>2018-08-18</td>
+                        <td>Voir <br /> Modifier <br /> Supprimer</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <button class="btn btn-outline-secondary article" type="submit"><i class="fas fa-pencil-alt"></i> &nbsp; Écrire un nouvel article</button>
     </div>
 </article>
 <?php $content = ob_get_clean(); ?>
 
-<?php require('template.php'); ?>
+<?php require('template.php');

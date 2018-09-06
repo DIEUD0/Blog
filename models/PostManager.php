@@ -37,5 +37,4 @@ class PostManager extends Manager
 
         return $affectedLines;
     }
-
 }

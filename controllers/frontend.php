@@ -47,8 +47,7 @@ function addComment($postId, $mail, $author, $comment)
 
     if ($affectedLines === false) {
         throw new Exception('Impossible d\'ajouter le commentaire !');
-    }
-    else {
+    } else {
         header('Location: index.php?page=post&id=' . $postId);
     }
 }
@@ -72,7 +71,7 @@ function sendMail($subject, $comment, $mail)
 {
     $contactManager = new \OpenClassrooms\Projet4\Blog\ContactManager();
     
-    $startSend = $contactManager->sendMail($subject, $comment, $mail);
+    $startSend = $contactManager->sendThisMail($subject, $comment, $mail);
     
     header('Location: index.php?page=contact&status=sended');
 }

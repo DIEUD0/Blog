@@ -27,10 +27,10 @@ class ContactManager extends Manager
         return $this->_status;
     }
 
-    public function sendMail($subject, $comment, $mail)
+    public function sendThisMail($subject, $comment, $mail)
     {
-        $headers = 'From: '.$mail."\r\n".
-                    'Reply-To: '.$mail."\r\n";
+        $headers = 'Reply-To:' .$mail. "\r\n";
+        $headers .= 'From:' .$mail. "\r\n";
         $send = mail($this->_myMail, $subject, $comment, $headers);
     }
 }
