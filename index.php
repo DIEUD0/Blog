@@ -5,16 +5,12 @@ require('controllers/backend.php');
 try {
     if (isset($_GET['page'])) {
         if ($_GET['page'] == 'blog') {
-            if (isset($_GET['id']) && $_GET['id'] > 0) {
-                showBlog($_GET['id']);
-            }
-        } elseif ($_GET['page'] == 'category') {
             if (isset($_GET['cat']) && $_GET['cat'] > 0 && isset($_GET['id']) && $_GET['id'] > 0) {
                 showBlog($_GET['id'], $_GET['cat']);
             } elseif (isset($_GET['cat']) && $_GET['cat'] > 0 && empty($_GET['id'])) {
                 showBlog(1, $_GET['cat']);
-            } else {
-                throw new Exception('Aucun identifiant de catégorie envoyé');
+            } elseif (isset($_GET['id']) && $_GET['id'] > 0 ) {
+                showBlog($_GET['id']);
             }
         } elseif ($_GET['page'] == 'post') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {

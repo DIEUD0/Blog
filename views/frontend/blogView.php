@@ -37,7 +37,7 @@ if (!empty($categoryId)) {
         } ?> ">
 
             <?php if (!empty($categoryId)): ?>
-            <a class="page-link" href="index.php?page=category&amp;cat=<?= $categoryId; ?>&amp;id=<?= $pageIndex-1; ?>">
+            <a class="page-link" href="index.php?page=blog&amp;cat=<?= $categoryId; ?>&amp;id=<?= $pageIndex-1; ?>">
                 <i class="fas fa-chevron-left"></i> &nbsp; Précédent
             </a>
             <?php else: ?>
@@ -55,11 +55,11 @@ if (!empty($categoryId)) {
                 echo ' active';
             }
             echo '">';
-            echo '<a class="page-link" href="index.php?page=';
+            echo '<a class="page-link" href="index.php?page=blog';
             if (empty($categoryId)) {
-                echo 'blog&amp;id=' . $i . '">' . $i;
+                echo '&amp;id=' . $i . '">' . $i;
             } else {
-                echo 'category&amp;cat=' . $categoryId . '&amp;id=' . $i . '">' . $i;
+                echo '&amp;cat=' . $categoryId . '&amp;id=' . $i . '">' . $i;
             }
             if ($pageIndex == $i) {
                 echo ' <span class="sr-only">(current)</span>';
@@ -73,7 +73,7 @@ if (!empty($categoryId)) {
         } ?> ">
 
             <?php if (!empty($categoryId)): ?>
-            <a class="page-link" href="index.php?page=category&amp;cat=<?= $categoryId; ?>&amp;id=<?= $pageIndex+1; ?>">
+            <a class="page-link" href="index.php?page=blog&amp;cat=<?= $categoryId; ?>&amp;id=<?= $pageIndex+1; ?>">
                 Suivant &nbsp; <i class="fas fa-chevron-right"></i>
             </a>
             <?php else: ?>
@@ -101,7 +101,7 @@ if (!empty($categoryId)) {
             <?php
             while ($category = $catSidebar->fetch()) {
                 ?>
-            <a href="./index.php?page=category&amp;cat=<?= $category['id'] ?>">
+            <a href="./index.php?page=blog&amp;cat=<?= $category['id'] ?>">
                 <li class="list-group-item d-flex justify-content-between align-items-center
                     <?php if (!empty($categoryId) && $categoryId == $category['id']) {
                     echo ' active bg-secondary';
