@@ -55,8 +55,23 @@ try {
                 throw new Exception('Tous les champs ne sont pas remplis !');
             }
         } elseif ($_GET['page'] == 'admin') {
-            showAdmin(1);
+            if (isset($_GET['cat']) && $_GET['cat'] > 0 && isset($_GET['id']) && $_GET['id'] > 0) {
+                showAdmin($_GET['id'], $_GET['cat']);
+            } elseif (isset($_GET['cat']) && $_GET['cat'] > 0 && empty($_GET['id'])) {
+                showAdmin(1, $_GET['cat']);
+            } elseif (isset($_GET['id']) && $_GET['id'] > 0 ) {
+                showAdmin($_GET['id']);
+            } else {
+                showAdmin(1);
+            }
+        } elseif($_GET['page'] == 'addCategory') {
+            if (!empty($_POST['catName'])) {
+                addCategory($_POST['catName']);
+            } else {
+                throw new Exception('Champ vide');
+            }
         }
+
     } else {
         showBlog(1);
     }

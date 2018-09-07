@@ -26,8 +26,11 @@ class AdminManager extends Manager
         return $req;
     }
 
-    public function addCategory()
+    public function addCategory($catName)
     {
-        
+        $cat = $this->_db->prepare('INSERT INTO categorie(name) VALUE(?)');
+        $affectedLines = $cat->execute(array($catName));
+
+        return $affectedLines;
     }
 }

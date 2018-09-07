@@ -14,7 +14,13 @@
                 <a href="#">
                     <i class="fa fa-times text-danger" aria-hidden="true"></i>
                 </a>
+                <?php if ($category['total'] > 0): ?>
+                <a href="./index.php?page=admin&amp;cat=<?= $category['id'] ?>">
+                    <?= $category['name'] ?>
+                </a>
+                <?php else: ?>
                 <?= $category['name'] ?>
+                <?php endif; ?>
                 <span class="badge badge-pill badge-primary">
                     <?= $category['total'] ?>
                 </span>
@@ -24,14 +30,15 @@
             $catSidebar->closeCursor();
             ?>
         </ul>
-        <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Ajouter une catégorie" aria-label="Ajouter une catégorie">
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button">+</button>
+        <form action="index.php?page=addCategory" method="post">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Ajouter une catégorie" aria-label="Ajouter une catégorie" id="catName" name="catName">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-success" type="submit">+</button>
+                </div>
             </div>
-        </div>
+        </form>
     </div>
-
     <div>
         <p class="asidetitle">Spam</p>
         <p>
@@ -42,9 +49,9 @@
 <article class="col-md-8">
     <div>
         <h2 class="">
-        <button class="btn btn-outline-secondary article float-right" type="submit">
-            <i class="fas fa-pencil-alt"></i> &nbsp; Écrire un nouvel article
-        </button>
+            <button class="btn btn-outline-success article float-right" type="submit">
+                <i class="fas fa-pencil-alt"></i> &nbsp; Écrire un nouvel article
+            </button>
             Vos billets :
         </h2>
         <div class="table-responsive">
@@ -58,49 +65,57 @@
                     </tr>
                 </thead>
                 <tbody>
-                <?php
+                    <?php
                 while ($post = $posts->fetch()) {
                     ?>
                     <tr>
-                        <th scope="row"><?= $post['id'] ?></th>
-                        <td><a href="#" target="_blank"><?= htmlspecialchars($post['title']) ?></a></td>
-                        <td><?= $post['creation_date_fr'] ?></td>
+                        <th scope="row">
+                            <?= $post['id'] ?>
+                        </th>
+                        <td><a href="index.php?page=post&amp;id=<?= $post['id'] ?>"
+                                target="_blank">
+                                <?= htmlspecialchars($post['title']) ?></a></td>
                         <td>
-                            <a class="btn btn-primary" href="#" aria-label="Modifier">
+                            <?= $post['creation_date_fr'] ?>
+                        </td>
+                        <td>
+                            <a class="btn btn-primary" href="index.php?page=admin&amp;action=edit&amp;id=<?= $post['id'] ?>"
+                                aria-label="Modifier">
                                 <i class="fas fa-pencil-alt" aria-hidden="true"></i>
                             </a>
-                            <a class="btn btn-danger" href="#" aria-label="Supprimer">
+                            <a class="btn btn-danger" href="index.php?page=admin&amp;action=delete&amp;id=<?= $post['id'] ?>"
+                                aria-label="Supprimer">
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </a>
                         </td>
                     </tr>
                     <?php
-                    }
+                }
                     ?>
                 </tbody>
             </table>
         </div>
 
-    <?php if ($pagination > 1) {
-        ?>
-    <ul class="pagination justify-content-center">
-        <li class="page-item <?php if ($pageIndex == 1) {
-            echo 'disabled';
-        } ?> ">
+        <?php if ($pagination > 1) {
+                        ?>
+        <ul class="pagination justify-content-center">
+            <li class="page-item <?php if ($pageIndex == 1) {
+                            echo 'disabled';
+                        } ?> ">
 
-            <?php if (!empty($categoryId)): ?>
-            <a class="page-link" href="index.php?page=category&amp;cat=<?= $categoryId; ?>&amp;id=<?= $pageIndex-1; ?>">
-                <i class="fas fa-chevron-left"></i> &nbsp; Précédent
-            </a>
-            <?php else: ?>
-            <a class="page-link" href="index.php?page=blog&amp;id=<?= $pageIndex-1; ?>">
-                <i class="fas fa-chevron-left"></i> &nbsp; Précédent
-            </a>
-            <?php endif; ?>
+                <?php if (!empty($categoryId)): ?>
+                <a class="page-link" href="index.php?page=admin&amp;cat=<?= $categoryId; ?>&amp;id=<?= $pageIndex-1; ?>">
+                    <i class="fas fa-chevron-left"></i> &nbsp; Précédent
+                </a>
+                <?php else: ?>
+                <a class="page-link" href="index.php?page=admin&amp;id=<?= $pageIndex-1; ?>">
+                    <i class="fas fa-chevron-left"></i> &nbsp; Précédent
+                </a>
+                <?php endif; ?>
 
-        </li>
+            </li>
 
-        <?php
+            <?php
         for ($i = 1 ; $i <= $pagination ; $i++) {
             echo '<li class="page-item';
             if ($pageIndex == $i) {
@@ -109,9 +124,9 @@
             echo '">';
             echo '<a class="page-link" href="index.php?page=';
             if (empty($categoryId)) {
-                echo 'blog&amp;id=' . $i . '">' . $i;
+                echo 'admin&amp;id=' . $i . '">' . $i;
             } else {
-                echo 'category&amp;cat=' . $categoryId . '&amp;id=' . $i . '">' . $i;
+                echo 'admin&amp;cat=' . $categoryId . '&amp;id=' . $i . '">' . $i;
             }
             if ($pageIndex == $i) {
                 echo ' <span class="sr-only">(current)</span>';
@@ -120,24 +135,24 @@
             echo '</li>';
         } ?>
 
-        <li class="page-item <?php if ($pageIndex == $pagination) {
+            <li class="page-item <?php if ($pageIndex == $pagination) {
             echo 'disabled';
         } ?> ">
 
-            <?php if (!empty($categoryId)): ?>
-            <a class="page-link" href="index.php?page=category&amp;cat=<?= $categoryId; ?>&amp;id=<?= $pageIndex+1; ?>">
-                Suivant &nbsp; <i class="fas fa-chevron-right"></i>
-            </a>
-            <?php else: ?>
-            <a class="page-link" href="index.php?page=blog&amp;id=<?= $pageIndex+1; ?>">
-                Suivant &nbsp; <i class="fas fa-chevron-right"></i>
-            </a>
-            <?php endif; ?>
+                <?php if (!empty($categoryId)): ?>
+                <a class="page-link" href="index.php?page=admin&amp;cat=<?= $categoryId; ?>&amp;id=<?= $pageIndex+1; ?>">
+                    Suivant &nbsp; <i class="fas fa-chevron-right"></i>
+                </a>
+                <?php else: ?>
+                <a class="page-link" href="index.php?page=admin&amp;id=<?= $pageIndex+1; ?>">
+                    Suivant &nbsp; <i class="fas fa-chevron-right"></i>
+                </a>
+                <?php endif; ?>
 
-        </li>
-    </ul>
-    <?php
-    } ?>
+            </li>
+        </ul>
+        <?php
+                    } ?>
     </div>
 </article>
 <?php $content = ob_get_clean(); ?>
