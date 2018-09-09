@@ -11,7 +11,7 @@
             while ($category = $catSidebar->fetch()) {
                 ?>
             <li class="list-group-item d-flex justify-content-between align-items-center">
-                <a href="#">
+                <a href="./index.php?action=delCategory&amp;id=<?= $category['id'] ?>">
                     <i class="fa fa-times text-danger" aria-hidden="true"></i>
                 </a>
                 <?php if ($category['total'] > 0): ?>
@@ -30,7 +30,7 @@
             $catSidebar->closeCursor();
             ?>
         </ul>
-        <form action="index.php?page=addCategory" method="post">
+        <form action="index.php?action=addCategory" method="post">
             <div class="input-group mb-3">
                 <input type="text" class="form-control" placeholder="Ajouter une catégorie" aria-label="Ajouter une catégorie" id="catName" name="catName">
                 <div class="input-group-append">
@@ -49,9 +49,9 @@
 <article class="col-md-8">
     <div>
         <h2 class="">
-            <button class="btn btn-outline-success article float-right" type="submit">
+            <a class="btn btn-outline-success article float-right" href="index.php?page=admin&amp;action=new" role="button">
                 <i class="fas fa-pencil-alt"></i> &nbsp; Écrire un nouvel article
-            </button>
+            </a>
             Vos billets :
         </h2>
         <div class="table-responsive">

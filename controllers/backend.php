@@ -39,3 +39,16 @@ function addCategory($catName)
         header('Location: index.php?page=admin');
     }
 }
+
+function delCategory($catId)
+{
+    $adminManager = new \OpenClassrooms\Projet4\Blog\AdminManager();
+
+    $affectedLines = $adminManager->delCategory($catId);
+
+    if ($affectedLines === false) {
+        throw new Exception('Impossible de supprimer la catégorie !');
+    } else {
+        header('Location: index.php?page=admin');
+    }
+}

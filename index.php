@@ -9,7 +9,7 @@ try {
                 showBlog($_GET['id'], $_GET['cat']);
             } elseif (isset($_GET['cat']) && $_GET['cat'] > 0 && empty($_GET['id'])) {
                 showBlog(1, $_GET['cat']);
-            } elseif (isset($_GET['id']) && $_GET['id'] > 0 ) {
+            } elseif (isset($_GET['id']) && $_GET['id'] > 0) {
                 showBlog($_GET['id']);
             }
         } elseif ($_GET['page'] == 'post') {
@@ -40,7 +40,19 @@ try {
             } else {
                 showContact();
             }
-        } elseif ($_GET['page'] == 'sendMail') {
+        } elseif ($_GET['page'] == 'admin') {
+            if (isset($_GET['cat']) && $_GET['cat'] > 0 && isset($_GET['id']) && $_GET['id'] > 0) {
+                showAdmin($_GET['id'], $_GET['cat']);
+            } elseif (isset($_GET['cat']) && $_GET['cat'] > 0 && empty($_GET['id'])) {
+                showAdmin(1, $_GET['cat']);
+            } elseif (isset($_GET['id']) && $_GET['id'] > 0) {
+                showAdmin($_GET['id']);
+            } else {
+                showAdmin(1);
+            }
+        }
+    } elseif (isset($_GET['action'])) {
+        if ($_GET['action'] == 'sendMail') {
             if (!empty($_POST['subject']) && !empty($_POST['comment']) && !empty($_POST['mail'])) {
                 if (sanitize_mail($_POST['mail'])) {
                     sendMail($_POST['subject'], $_POST['comment'], $_POST['mail']);
@@ -50,24 +62,19 @@ try {
             } else {
                 throw new Exception('Tous les champs ne sont pas remplis !');
             }
-        } elseif ($_GET['page'] == 'admin') {
-            if (isset($_GET['cat']) && $_GET['cat'] > 0 && isset($_GET['id']) && $_GET['id'] > 0) {
-                showAdmin($_GET['id'], $_GET['cat']);
-            } elseif (isset($_GET['cat']) && $_GET['cat'] > 0 && empty($_GET['id'])) {
-                showAdmin(1, $_GET['cat']);
-            } elseif (isset($_GET['id']) && $_GET['id'] > 0 ) {
-                showAdmin($_GET['id']);
-            } else {
-                showAdmin(1);
-            }
-        } elseif($_GET['page'] == 'addCategory') {
+        } elseif ($_GET['action'] == 'addCategory') {
             if (!empty($_POST['catName'])) {
                 addCategory($_POST['catName']);
             } else {
                 throw new Exception('Champ vide');
             }
+        } elseif ($_GET['action'] == 'delCategory') {
+            if (!empty($_GET['id'])) {
+                delCategory($_GET['id']);
+            } else {
+                throw new Exception('Champ vide');
+            }
         }
-
     } else {
         showBlog(1);
     }

@@ -33,4 +33,12 @@ class AdminManager extends Manager
 
         return $affectedLines;
     }
+
+    public function delCategory($catId)
+    {
+        $cat = $this->_db->prepare('DELETE FROM categorie WHERE id=?');
+        $affectedLines = $cat->execute(array($catId));
+
+        return $affectedLines;
+    }
 }

@@ -16,7 +16,7 @@
             Nam tincidunt diam magna, id gravida orci egestas nec. Curabitur id nunc ipsum. Mauris sagittis id dolor
             quis euismod. Donec at dictum tortor. Duis pulvinar vulputate laoreet. Praesent quis arcu libero.
         </p>
-        <form class="formcomment text-center" action="index.php?page=sendMail" method="post">
+        <form class="formcomment text-center" action="index.php?action=sendMail" method="post">
             <div class="form-row">
                 <div class="col">
                     <input type="text" class="form-control" placeholder="Sujet" id="subject" name="subject">
