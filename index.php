@@ -1,6 +1,7 @@
 <?php
 require('controllers/frontend.php');
 require('controllers/backend.php');
+require('controllers/function.inc.php');
 
 try {
     if (isset($_GET['page'])) {
