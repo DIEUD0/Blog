@@ -27,7 +27,7 @@ class ContactManager extends Manager
         return $this->_status;
     }
 
-    public function sendThisMail($subject, $comment, $mail)
+    public function sendMail($subject, $comment, $mail)
     {
         $headers = 'Reply-To:' .$mail. "\r\n";
         $headers .= 'From:' .$mail. "\r\n";

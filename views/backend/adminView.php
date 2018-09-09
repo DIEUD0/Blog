@@ -2,57 +2,17 @@
 
 <?php ob_start(); ?>
 
-<aside class="col-md-4">
-
-    <div>
-        <p class="asidetitle">Catégories</p>
-        <ul class="list-group">
-            <?php
-            while ($category = $catSidebar->fetch()) {
-                ?>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                <a href="./index.php?action=delCategory&amp;id=<?= $category['id'] ?>">
-                    <i class="fa fa-times text-danger" aria-hidden="true"></i>
-                </a>
-                <?php if ($category['total'] > 0): ?>
-                <a href="./index.php?page=admin&amp;cat=<?= $category['id'] ?>">
-                    <?= $category['name'] ?>
-                </a>
-                <?php else: ?>
-                <?= $category['name'] ?>
-                <?php endif; ?>
-                <span class="badge badge-pill badge-primary">
-                    <?= $category['total'] ?>
-                </span>
-            </li>
-            <?php
-            }
-            $catSidebar->closeCursor();
-            ?>
-        </ul>
-        <form action="index.php?action=addCategory" method="post">
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Ajouter une catégorie" aria-label="Ajouter une catégorie" id="catName" name="catName">
-                <div class="input-group-append">
-                    <button class="btn btn-outline-success" type="submit">+</button>
-                </div>
-            </div>
-        </form>
-    </div>
-    <div>
-        <p class="asidetitle">Spam</p>
-        <p>
-            Aucun signalement pour le moment
-        </p>
-    </div>
-</aside>
-<article class="col-md-8">
+<article class="col-lg-8">
     <div>
         <h2 class="">
             <a class="btn btn-outline-success article float-right" href="index.php?page=new" role="button">
                 <i class="fas fa-pencil-alt"></i> &nbsp; Écrire un nouvel article
             </a>
-            Vos billets :
+            Vos billets
+            <?php if (!empty($categoryId)) {
+    echo '"'.$categoryName.'"';
+} ?>
+            :
         </h2>
         <div class="table-responsive">
             <table class="table table-hover text-center">
@@ -79,7 +39,7 @@
                             <?= $post['creation_date_fr'] ?>
                         </td>
                         <td>
-                            <a class="btn btn-primary" href="index.php?action=edit&amp;id=<?= $post['id'] ?>"
+                            <a class="btn btn-primary" href="index.php?action=editPost&amp;id=<?= $post['id'] ?>"
                                 aria-label="Modifier">
                                 <i class="fas fa-pencil-alt" aria-hidden="true"></i>
                             </a>
@@ -155,6 +115,92 @@
                     } ?>
     </div>
 </article>
+
+<aside class="col-lg-4">
+
+    <div>
+        <p class="asidetitle">Catégories</p>
+        <ul class="list-group">
+            <?php while ($category = $catSidebar->fetch()) {
+                        ?>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <a href="./index.php?action=delCategory&amp;id=<?= $category['id'] ?>">
+                    <i class="fa fa-times text-danger" aria-hidden="true"></i>
+                </a>
+                <?php if ($category['total'] > 0): ?>
+                <a href="./index.php?page=admin&amp;cat=<?= $category['id'] ?>">
+                    <?= $category['name'] ?>
+                </a>
+                <?php else: ?>
+                <?= $category['name'] ?>
+                <?php endif; ?>
+                <span class="badge badge-pill
+<?php if (!empty($categoryId) && $categoryId == $category['id']): ?>
+                     badge-success
+                        <?php else: ?>
+                         badge-primary
+                            <?php endif; ?>
+                    ">
+                    <?= $category['total'] ?>
+                </span>
+            </li>
+            <?php
+                    }
+        $catSidebar->closeCursor();
+        ?>
+        </ul>
+        <form action="index.php?action=addCategory" method="post">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Ajouter une catégorie" aria-label="Ajouter une catégorie"
+                    id="catName" name="catName">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-success" type="submit"><i class="fas fa-plus"></i></button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <p class="asidetitle">Spam :</p>
+        <div id="carouselContent" class="carousel slide" data-interval="false">
+            <div class="carousel-inner">
+                <?php $x=1; while ($spam = $spamSidebar->fetch()) {
+            ?>
+                <p class="carousel-item <?php if ($x == 1) {
+                echo 'active';
+            } ?> text-center p-4">
+                    <strong>
+                        <?= $spam['author']; ?></strong>
+                    <i>(
+                        <?= $spam['creation_date_fr']; ?>)</i><br />
+                    <?= $spam['comment']; ?><br /><br />
+                    <span class="text-danger">Reporter
+                        <?= $spam['report']; ?> fois</span><br /><br />
+                    <span class="d-flex justify-content-around">
+                        <a href="index.php?action=deleteComment&amp;id=<?= $spam['id']; ?>"><i
+                                class="fa fa-times fa-2x text-danger"></i></a>
+                        <a href="index.php?page=post&amp;id=<?= $spam['post_id'].'#'.$spam['id']; ?>"
+                            target="_blank"><i class="fas fa-eye fa-2x"></i></a>
+                        <a href="index.php?action=approuveComment&amp;id=<?= $spam['id']; ?>"><i
+                                class="fas fa-check fa-2x text-success "></i></a>
+                    </span>
+                </p>
+                <?php $x++;
+        }
+        $spamSidebar->closeCursor();
+        ?>
+            </div>
+            <a class="carousel-control-prev" href="#carouselContent" role="button" data-slide="prev">
+                <span><i class="fa fa-angle-left text-secondary fa-2x" aria-hidden="true"></i></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselContent" role="button" data-slide="next">
+                <span><i class="fa fa-angle-right text-secondary fa-2x" aria-hidden="true"></i></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+</aside>
+
 <?php $content = ob_get_clean(); ?>
 
 <?php require('template.php');

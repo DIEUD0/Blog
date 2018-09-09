@@ -37,4 +37,12 @@ class PostManager extends Manager
 
         return $affectedLines;
     }
+
+    public function reportComment($commentId)
+    {
+        $comments = $this->_db->prepare('UPDATE comment SET report = report+1 WHERE id = ?');
+        $affectedLines = $comments->execute(array($commentId));
+
+        return $affectedLines;
+    }
 }

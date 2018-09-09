@@ -133,3 +133,13 @@ a.none {
     font-size: 0.9em;
     color: red;
 }
+
+.carousel {
+    background-color: inherit;
+    margin-bottom: inherit;
+    padding: inherit;
+    border: inherit;
+    -webkit-border-radius: inherit;
+    -moz-border-radius: inherit;
+    border-radius: inherit;
+}

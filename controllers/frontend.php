@@ -52,6 +52,19 @@ function addComment($postId, $mail, $author, $comment)
     }
 }
 
+function reportComment($postId, $commentId)
+{
+    $postManager = new \OpenClassrooms\Projet4\Blog\PostManager();
+
+    $affectedLines = $postManager->reportComment($commentId);
+
+    if ($affectedLines === false) {
+        throw new Exception('Impossible de reporter le commentaire !');
+    } else {
+        header('Location: index.php?page=post&id=' . $postId . '&report=ok');
+    }
+}
+
 function showAbout()
 {
     require('views/frontend/aboutView.php');
@@ -71,7 +84,11 @@ function sendMail($subject, $comment, $mail)
 {
     $contactManager = new \OpenClassrooms\Projet4\Blog\ContactManager();
     
-    $startSend = $contactManager->sendThisMail($subject, $comment, $mail);
+    $sendIt = $contactManager->sendMail($subject, $comment, $mail);
     
-    header('Location: index.php?page=contact&status=sended');
+    if ($sendIt === false) {
+        throw new Exception('Impossible d\'envoyer l\'email !');
+    } else {
+        header('Location: index.php?page=contact&status=sended');
+    }
 }

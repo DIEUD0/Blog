@@ -38,7 +38,7 @@ try {
                 showAdmin(1);
             }
         } elseif ($_GET['page'] == 'new') {
-            showNewPost();
+            showCreatePost();
         }
     } elseif (isset($_GET['action'])) {
         if ($_GET['action'] == 'addComment') {
@@ -69,25 +69,49 @@ try {
             if (!empty($_POST['catName'])) {
                 addCategory($_POST['catName']);
             } else {
-                throw new Exception('Champ vide');
+                throw new Exception('Aucune catégorie choisie');
             }
         } elseif ($_GET['action'] == 'delCategory') {
             if (!empty($_GET['id'])) {
                 delCategory($_GET['id']);
             } else {
-                throw new Exception('Champ vide');
+                throw new Exception('Aucune catégorie choisie');
             }
-        } elseif ($_GET['action'] == 'newPost') {
+        } elseif ($_GET['action'] == 'addPost') {
             if (!empty($_POST['cat']) && !empty($_POST['title']) && !empty($_POST['post'])) {
-                newPost($_POST['cat'], $_POST['title'], $_POST['post']);
+                addPost($_POST['cat'], $_POST['title'], $_POST['post']);
             } else {
-                throw new Exception('Champ vide');
+                throw new Exception('Problème d\'ajout de billet');
             }
         } elseif ($_GET['action'] == 'delPost') {
             if (!empty($_GET['id'])) {
                 delPost($_GET['id']);
             } else {
-                throw new Exception('Champ vide');
+                throw new Exception('Aucun billet choisi');
+            }
+        } elseif ($_GET['action'] == 'editPost') {
+            if (!empty($_GET['id'])) {
+                editPost($_GET['id']);
+            } else {
+                throw new Exception('Aucun billet choisi');
+            }
+        } elseif ($_GET['action'] == 'report') {
+            if (!empty($_GET['post']) && !empty($_GET['id'])) {
+                reportComment($_GET['post'], $_GET['id']);
+            } else {
+                throw new Exception('Aucun commentaire choisi');
+            }
+        } elseif ($_GET['action'] == 'deleteComment') {
+            if (!empty($_GET['id'])) {
+                deleteComment($_GET['id']);
+            } else {
+                throw new Exception('Aucun commentaire choisi');
+            }
+        } elseif ($_GET['action'] == 'approuveComment') {
+            if (!empty($_GET['id'])) {
+                approuveComment($_GET['id']);
+            } else {
+                throw new Exception('Aucun commentaire choisi');
             }
         } 
     } else {

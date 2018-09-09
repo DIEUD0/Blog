@@ -19,12 +19,34 @@ function showAdmin($pageId, $catId = '')
     $totalPosts = $blogManager->getTotalPosts();
 
     //page
+    $categoryName = $blogManager->getCategoryName();
     $posts = $blogManager->getPosts();
     $pagination = $blogManager->getPagination();
     //sidebar
-    $catSidebar = $adminManager->getCategorySideBar();
+    $catSidebar = $adminManager->getCategory();
+    $spamSidebar = $adminManager->getSpam();
 
     require('views/backend/adminView.php');
+}
+
+function showCreatePost()
+{
+    $adminManager = new \OpenClassrooms\Projet4\Blog\AdminManager();
+    
+    $categoryList = $adminManager->getCategory();
+
+    require('views/backend/createPostView.php');
+}
+
+function showEditPost($postId)
+{
+    $adminManager = new \OpenClassrooms\Projet4\Blog\AdminManager();
+    $postManager = new \OpenClassrooms\Projet4\Blog\PostManager();
+
+    $categoryList = $adminManager->getCategory();
+    $post = $postManager->getPost($postId);
+
+    require('views/backend/createPostView.php');
 }
 
 function addCategory($catName)
@@ -53,20 +75,11 @@ function delCategory($catId)
     }
 }
 
-function showNewPost()
-{
-    $adminManager = new \OpenClassrooms\Projet4\Blog\AdminManager();
-    
-    $catSidebar = $adminManager->getCategorySideBar();
-
-    require('views/backend/newPostView.php');
-}
-
-function newPost($cat, $title, $post)
+function addPost($cat, $title, $post)
 {
     $adminManager = new \OpenClassrooms\Projet4\Blog\AdminManager();
 
-    $affectedLines = $adminManager->newPost($cat, $title, $post);
+    $affectedLines = $adminManager->addPost($cat, $title, $post);
 
     if ($affectedLines === false) {
         throw new Exception('Impossible d\'ajouter le nouveau billet !');
@@ -75,14 +88,46 @@ function newPost($cat, $title, $post)
     }
 }
 
-function delPost($catId)
+function delPost($postId)
 {
     $adminManager = new \OpenClassrooms\Projet4\Blog\AdminManager();
 
-    $affectedLines = $adminManager->delPost($catId);
+    $affectedLines = $adminManager->delPost($postId);
 
     if ($affectedLines === false) {
-        throw new Exception('Impossible de supprimer la catégorie !');
+        throw new Exception('Impossible de supprimer le post !');
+    } else {
+        header('Location: index.php?page=admin');
+    }
+}
+
+function editPost($postId)
+{
+    $adminManager = new \OpenClassrooms\Projet4\Blog\AdminManager();
+
+}
+
+function deleteComment($commentId)
+{
+    $adminManager = new \OpenClassrooms\Projet4\Blog\AdminManager();
+
+    $affectedLines = $adminManager->deleteComment($commentId);
+
+    if ($affectedLines === false) {
+        throw new Exception('Impossible de supprimer le commentaire');
+    } else {
+        header('Location: index.php?page=admin');
+    }
+}
+
+function approuveComment($commentId)
+{
+    $adminManager = new \OpenClassrooms\Projet4\Blog\AdminManager();
+
+    $affectedLines = $adminManager->approuveComment($commentId);
+
+    if ($affectedLines === false) {
+        throw new Exception('Impossible d\'approuver le commentaire');
     } else {
         header('Location: index.php?page=admin');
     }

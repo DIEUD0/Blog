@@ -2,6 +2,12 @@
 
 <?php ob_start(); ?>
 <article class="col-md-12">
+<?php if (isset($_GET['report']) && $_GET['report'] == 'ok') {
+    ?>
+    <div class="bg-success text-light">
+        <h3 class="text-center">Merci d'avoir reporter un commentaire indésirable ! &nbsp;<i class="fas fa-check"></i></h3>
+    </div>
+    <?php } ?>
     <div>
         <span class="datepost float-right">
             Posté le
@@ -10,9 +16,7 @@
         <h2>
             <?= htmlspecialchars($post['title']) ?>
         </h2>
-        <p>
-            <?= nl2br(htmlspecialchars($post['post'])) ?>
-        </p>
+            <?= htmlspecialchars_decode($post['post']) ?>
     </div>
     <div>
         <h3>Ajouter un commentaire :</h3>
@@ -36,11 +40,11 @@
     <?php
     while ($comment = $comments->fetch()) {
         ?>
-    <div>
+    <div id="<?= $comment['id'] ?>">
         <span class="datepost float-right">
             Posté le
             <?= $comment['comment_date_fr'] ?> &nbsp;
-            <a href="index.php?page=post&amp;id=<?= $post['id'] ?>" class="spam">Signaler
+            <a href="index.php?action=report&amp;post=<?= $post['id'] ?>&amp;id=<?= $comment['id'] ?>" class="spam">Signaler
                 <i class="fa fa-times"></i></a>
         </span>
         <p>

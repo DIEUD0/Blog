@@ -5,7 +5,7 @@
     <?php if ($status) {
     ?>
     <div class="bg-success text-light">
-        <h3 class="text-center">Votre email a bien été envoyer &nbsp;<i class="fas fa-check"></i></h3>
+        <h3 class="text-center">Votre email a bien été envoyé &nbsp; <i class="fas fa-check"></i></h3>
     </div>
     <?php
 } else {

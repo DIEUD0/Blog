@@ -13,7 +13,7 @@ class AdminManager extends Manager
         $this->_db = $this->dbConnect();
     }
 
-    public function getCategorySideBar()
+    public function getCategory()
     {
         $req = $this->_db->query('
         SELECT c.id, c.name, COUNT(b.categorie) total
@@ -42,7 +42,7 @@ class AdminManager extends Manager
         return $affectedLines;
     }
 
-    public function newPost($cat, $title, $post)
+    public function addPost($cat, $title, $post)
     {
         $new = $this->_db->prepare('INSERT INTO blog(categorie, title, post, post_date) VALUES(?, ?, ?, NOW())');
         $affectedLines = $new->execute(array($cat, $title, $post));
@@ -54,6 +54,34 @@ class AdminManager extends Manager
     {
         $post = $this->_db->prepare('DELETE FROM blog WHERE id=?');
         $affectedLines = $post->execute(array($postId));
+
+        return $affectedLines;
+    }
+
+    public function getSpam()
+    {
+        $req = $this->_db->query('
+        SELECT id, post_id, author, comment, report, DATE_FORMAT(comment_date, \'%d/%m/%Y\') AS creation_date_fr
+        FROM comment
+        WHERE report > 1
+        ORDER BY report DESC
+        ');
+
+        return $req;
+    }
+
+    public function deleteComment($commentId)
+    {
+        $post = $this->_db->prepare('DELETE FROM comment WHERE id=?');
+        $affectedLines = $post->execute(array($commentId));
+
+        return $affectedLines;
+    }
+
+    public function approuveComment($commentId)
+    {
+        $post = $this->_db->prepare('UPDATE comment SET report = 0 WHERE id=?');
+        $affectedLines = $post->execute(array($commentId));
 
         return $affectedLines;
     }

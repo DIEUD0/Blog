@@ -1,6 +1,6 @@
         tinymce.init({
             selector: '#tinymce',
-            language_url : "./public/js/langs/fr_FR.js",
+            language_url : './public/js/fr_FR.js',
             menubar: false,
             plugins: [
               'advlist autolink lists link image charmap print preview anchor textcolor',
