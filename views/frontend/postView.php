@@ -16,7 +16,7 @@
     </div>
     <div>
         <h3>Ajouter un commentaire :</h3>
-        <form class="formcomment text-center" action="index.php?page=addComment&amp;id=<?= $post['id'] ?>"
+        <form class="formcomment text-center" action="index.php?action=addComment&amp;id=<?= $post['id'] ?>"
             method="post">
             <div class="form-row">
                 <div class="col">

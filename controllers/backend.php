@@ -52,3 +52,12 @@ function delCategory($catId)
         header('Location: index.php?page=admin');
     }
 }
+
+function showNewPost()
+{
+    $adminManager = new \OpenClassrooms\Projet4\Blog\AdminManager();
+    
+    $catSidebar = $adminManager->getCategorySideBar();
+    
+    require('views/backend/newPostView.php');
+}

@@ -13,7 +13,7 @@
     <link rel="icon" type="image/x-icon" href="./public/images/favicon.ico" />
     <!--[if IE]><link rel="shortcut icon" type="image/x-icon" href="./public/images/favicon.ico" /><![endif]-->
     <meta name="robots" content="noindex">
-    <script src="//cloud.tinymce.com/stable/tinymce.min.js"></script>
+    <script src="//cloud.tinymce.com/stable/tinymce.min.js?apiKey=q9njbhscm29pwtfoiatu3y64l1qqdwksr7sp9gy0wfkkwa2u"></script>
 </head>
 
 <body>
@@ -66,6 +66,7 @@
     <script defer src="//use.fontawesome.com/releases/v5.2.0/js/all.js" integrity="sha384-4oV5EgaV02iISL2ban6c/RmotsABqE4yZxZLcYMAdG7FAPsyHYAPpywE9PJo+Khy"
         crossorigin="anonymous"></script>
     <script src="./public/js/gotop.js"></script>
+    <script src="./public/js/tinymce.js"></script>
 </body>
 
 </html>

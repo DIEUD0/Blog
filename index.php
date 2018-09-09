@@ -19,20 +19,6 @@ try {
             } else {
                 throw new Exception('Aucun identifiant de billet envoyé');
             }
-        } elseif ($_GET['page'] == 'addComment') {
-            if (isset($_GET['id']) && $_GET['id'] > 0) {
-                if (!empty($_POST['mail']) && !empty($_POST['author']) && !empty($_POST['comment'])) {
-                    if (verify_mail($_POST['mail'])) {
-                        addComment($_GET['id'], $_POST['mail'], $_POST['author'], $_POST['comment']);
-                    } else {
-                        throw new Exception('Votre adresse email est incorrect');
-                    }
-                } else {
-                    throw new Exception('Tous les champs ne sont pas remplis !');
-                }
-            } else {
-                throw new Exception('Aucun identifiant de billet envoyé');
-            }
         } elseif ($_GET['page'] == 'about') {
             showAbout();
         } elseif ($_GET['page'] == 'contact') {
@@ -51,9 +37,25 @@ try {
             } else {
                 showAdmin(1);
             }
+        } elseif ($_GET['page'] == 'new') {
+            showNewPost();
         }
     } elseif (isset($_GET['action'])) {
-        if ($_GET['action'] == 'sendMail') {
+        if ($_GET['action'] == 'addComment') {
+            if (isset($_GET['id']) && $_GET['id'] > 0) {
+                if (!empty($_POST['mail']) && !empty($_POST['author']) && !empty($_POST['comment'])) {
+                    if (verify_mail($_POST['mail'])) {
+                        addComment($_GET['id'], $_POST['mail'], $_POST['author'], $_POST['comment']);
+                    } else {
+                        throw new Exception('Votre adresse email est incorrect');
+                    }
+                } else {
+                    throw new Exception('Tous les champs ne sont pas remplis !');
+                }
+            } else {
+                throw new Exception('Aucun identifiant de billet envoyé');
+            }
+        } elseif ($_GET['action'] == 'sendMail') {
             if (!empty($_POST['subject']) && !empty($_POST['comment']) && !empty($_POST['mail'])) {
                 if (sanitize_mail($_POST['mail'])) {
                     sendMail($_POST['subject'], $_POST['comment'], $_POST['mail']);

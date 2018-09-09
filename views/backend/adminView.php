@@ -49,7 +49,7 @@
 <article class="col-md-8">
     <div>
         <h2 class="">
-            <a class="btn btn-outline-success article float-right" href="index.php?page=admin&amp;action=new" role="button">
+            <a class="btn btn-outline-success article float-right" href="index.php?page=new" role="button">
                 <i class="fas fa-pencil-alt"></i> &nbsp; Écrire un nouvel article
             </a>
             Vos billets :
