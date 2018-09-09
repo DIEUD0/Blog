@@ -77,7 +77,19 @@ try {
             } else {
                 throw new Exception('Champ vide');
             }
-        }
+        } elseif ($_GET['action'] == 'newPost') {
+            if (!empty($_POST['cat']) && !empty($_POST['title']) && !empty($_POST['post'])) {
+                newPost($_POST['cat'], $_POST['title'], $_POST['post']);
+            } else {
+                throw new Exception('Champ vide');
+            }
+        } elseif ($_GET['action'] == 'delPost') {
+            if (!empty($_GET['id'])) {
+                delPost($_GET['id']);
+            } else {
+                throw new Exception('Champ vide');
+            }
+        } 
     } else {
         showBlog(1);
     }

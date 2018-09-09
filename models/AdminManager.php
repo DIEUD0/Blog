@@ -41,4 +41,20 @@ class AdminManager extends Manager
 
         return $affectedLines;
     }
+
+    public function newPost($cat, $title, $post)
+    {
+        $new = $this->_db->prepare('INSERT INTO blog(categorie, title, post, post_date) VALUES(?, ?, ?, NOW())');
+        $affectedLines = $new->execute(array($cat, $title, $post));
+
+        return $affectedLines;
+    }
+
+    public function delPost($postId)
+    {
+        $post = $this->_db->prepare('DELETE FROM blog WHERE id=?');
+        $affectedLines = $post->execute(array($postId));
+
+        return $affectedLines;
+    }
 }

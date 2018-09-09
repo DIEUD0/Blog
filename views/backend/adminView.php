@@ -79,11 +79,11 @@
                             <?= $post['creation_date_fr'] ?>
                         </td>
                         <td>
-                            <a class="btn btn-primary" href="index.php?page=admin&amp;action=edit&amp;id=<?= $post['id'] ?>"
+                            <a class="btn btn-primary" href="index.php?action=edit&amp;id=<?= $post['id'] ?>"
                                 aria-label="Modifier">
                                 <i class="fas fa-pencil-alt" aria-hidden="true"></i>
                             </a>
-                            <a class="btn btn-danger" href="index.php?page=admin&amp;action=delete&amp;id=<?= $post['id'] ?>"
+                            <a class="btn btn-danger" href="index.php?action=delPost&amp;id=<?= $post['id'] ?>"
                                 aria-label="Supprimer">
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </a>

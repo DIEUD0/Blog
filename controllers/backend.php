@@ -58,6 +58,32 @@ function showNewPost()
     $adminManager = new \OpenClassrooms\Projet4\Blog\AdminManager();
     
     $catSidebar = $adminManager->getCategorySideBar();
-    
+
     require('views/backend/newPostView.php');
+}
+
+function newPost($cat, $title, $post)
+{
+    $adminManager = new \OpenClassrooms\Projet4\Blog\AdminManager();
+
+    $affectedLines = $adminManager->newPost($cat, $title, $post);
+
+    if ($affectedLines === false) {
+        throw new Exception('Impossible d\'ajouter le nouveau billet !');
+    } else {
+        header('Location: index.php?page=admin');
+    }
+}
+
+function delPost($catId)
+{
+    $adminManager = new \OpenClassrooms\Projet4\Blog\AdminManager();
+
+    $affectedLines = $adminManager->delPost($catId);
+
+    if ($affectedLines === false) {
+        throw new Exception('Impossible de supprimer la catégorie !');
+    } else {
+        header('Location: index.php?page=admin');
+    }
 }
