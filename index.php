@@ -1,4 +1,5 @@
 <?php
+session_start();
 require('controllers/frontend.php');
 require('controllers/backend.php');
 require('controllers/function.inc.php');
@@ -28,17 +29,27 @@ try {
                 showContact();
             }
         } elseif ($_GET['page'] == 'admin') {
-            if (isset($_GET['cat']) && $_GET['cat'] > 0 && isset($_GET['id']) && $_GET['id'] > 0) {
-                showAdmin($_GET['id'], $_GET['cat']);
-            } elseif (isset($_GET['cat']) && $_GET['cat'] > 0 && empty($_GET['id'])) {
-                showAdmin(1, $_GET['cat']);
-            } elseif (isset($_GET['id']) && $_GET['id'] > 0) {
-                showAdmin($_GET['id']);
+            if (isset($_SESSION['pseudo'])) {
+                if (isset($_GET['cat']) && $_GET['cat'] > 0 && isset($_GET['id']) && $_GET['id'] > 0) {
+                    showAdmin($_GET['id'], $_GET['cat']);
+                } elseif (isset($_GET['cat']) && $_GET['cat'] > 0 && empty($_GET['id'])) {
+                    showAdmin(1, $_GET['cat']);
+                } elseif (isset($_GET['id']) && $_GET['id'] > 0) {
+                    showAdmin($_GET['id']);
+                } else {
+                    showAdmin(1);
+                } 
             } else {
-                showAdmin(1);
+                throw new Exception('Veuillez vous connecter');
             }
         } elseif ($_GET['page'] == 'new') {
             showCreatePost();
+        } elseif ($_GET['page'] == 'login') {
+            if (empty($_SESSION['pseudo'])) {
+                showLogin();
+            } else {
+                header('Location: index.php?page=admin');
+            }
         }
     } elseif (isset($_GET['action'])) {
         if ($_GET['action'] == 'addComment') {
@@ -55,6 +66,12 @@ try {
             } else {
                 throw new Exception('Aucun identifiant de billet envoyé');
             }
+        } elseif ($_GET['action'] == 'report') {
+            if (!empty($_GET['post']) && !empty($_GET['id'])) {
+                reportComment($_GET['post'], $_GET['id']);
+            } else {
+                throw new Exception('Aucun commentaire choisi');
+            }
         } elseif ($_GET['action'] == 'sendMail') {
             if (!empty($_POST['subject']) && !empty($_POST['comment']) && !empty($_POST['mail'])) {
                 if (sanitize_mail($_POST['mail'])) {
@@ -65,55 +82,61 @@ try {
             } else {
                 throw new Exception('Tous les champs ne sont pas remplis !');
             }
-        } elseif ($_GET['action'] == 'addCategory') {
-            if (!empty($_POST['catName'])) {
-                addCategory($_POST['catName']);
+        } elseif ($_GET['action'] == 'login') {
+            if (!empty($_POST['name']) && !empty($_POST['password'])) {
+                tryLogin($_POST['name'], $_POST['password']);
             } else {
-                throw new Exception('Aucune catégorie choisie');
+                throw new Exception('Impossible de se connecter');
             }
-        } elseif ($_GET['action'] == 'delCategory') {
-            if (!empty($_GET['id'])) {
-                delCategory($_GET['id']);
-            } else {
-                throw new Exception('Aucune catégorie choisie');
-            }
-        } elseif ($_GET['action'] == 'addPost') {
-            if (!empty($_POST['cat']) && !empty($_POST['title']) && !empty($_POST['post'])) {
-                addPost($_POST['cat'], $_POST['title'], $_POST['post']);
-            } else {
-                throw new Exception('Problème d\'ajout de billet');
-            }
-        } elseif ($_GET['action'] == 'delPost') {
-            if (!empty($_GET['id'])) {
-                delPost($_GET['id']);
-            } else {
-                throw new Exception('Aucun billet choisi');
-            }
-        } elseif ($_GET['action'] == 'editPost') {
-            if (!empty($_GET['id'])) {
-                editPost($_GET['id']);
-            } else {
-                throw new Exception('Aucun billet choisi');
-            }
-        } elseif ($_GET['action'] == 'report') {
-            if (!empty($_GET['post']) && !empty($_GET['id'])) {
-                reportComment($_GET['post'], $_GET['id']);
-            } else {
-                throw new Exception('Aucun commentaire choisi');
-            }
-        } elseif ($_GET['action'] == 'deleteComment') {
-            if (!empty($_GET['id'])) {
-                deleteComment($_GET['id']);
-            } else {
-                throw new Exception('Aucun commentaire choisi');
-            }
-        } elseif ($_GET['action'] == 'approuveComment') {
-            if (!empty($_GET['id'])) {
-                approuveComment($_GET['id']);
-            } else {
-                throw new Exception('Aucun commentaire choisi');
-            }
-        } 
+        } elseif (isset($_SESSION['pseudo'])) {
+            if ($_GET['action'] == 'addCategory') {
+                if (!empty($_POST['catName'])) {
+                    addCategory($_POST['catName']);
+                } else {
+                    throw new Exception('Aucune catégorie choisie');
+                }
+            } elseif ($_GET['action'] == 'delCategory') {
+                if (!empty($_GET['id'])) {
+                    delCategory($_GET['id']);
+                } else {
+                    throw new Exception('Aucune catégorie choisie');
+                }
+            } elseif ($_GET['action'] == 'addPost') {
+                if (!empty($_POST['cat']) && !empty($_POST['title']) && !empty($_POST['post'])) {
+                    addPost($_POST['cat'], $_POST['title'], $_POST['post']);
+                } else {
+                    throw new Exception('Problème d\'ajout de billet');
+                }
+            } elseif ($_GET['action'] == 'delPost') {
+                if (!empty($_GET['id'])) {
+                    delPost($_GET['id']);
+                } else {
+                    throw new Exception('Aucun billet choisi');
+                }
+            } elseif ($_GET['action'] == 'editPost') {
+                if (!empty($_GET['id'])) {
+                    editPost($_GET['id']);
+                } else {
+                    throw new Exception('Aucun billet choisi');
+                }
+            } elseif ($_GET['action'] == 'deleteComment') {
+                if (!empty($_GET['id'])) {
+                    deleteComment($_GET['id']);
+                } else {
+                    throw new Exception('Aucun commentaire choisi');
+                }
+            } elseif ($_GET['action'] == 'approuveComment') {
+                if (!empty($_GET['id'])) {
+                    approuveComment($_GET['id']);
+                } else {
+                    throw new Exception('Aucun commentaire choisi');
+                }
+            }  elseif ($_GET['action'] == 'logout') {
+                logOut();
+            } 
+        } else {
+            throw new Exception('Veuillez vous connecter');
+        }
     } else {
         showBlog(1);
     }

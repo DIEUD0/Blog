@@ -88,7 +88,7 @@
             <p class="text-center">&copy; Blog créer pour un projet OpenClassrooms
                 <?php
                 if ($SHOWADMIN) {
-                    echo ' - <a href="index.php?page=admin">Administration</a>';
+                    echo ' - <a href="index.php?page=login">Administration</a>';
                 }
                 ?>
             </p>

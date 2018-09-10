@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  Dim 09 sep. 2018 à 23:53
+-- Généré le :  lun. 10 sep. 2018 à 10:12
 -- Version du serveur :  10.1.33-MariaDB
 -- Version de PHP :  7.2.6
 
@@ -25,6 +25,25 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `admin`
+--
+
+CREATE TABLE `admin` (
+  `id` int(11) NOT NULL,
+  `pseudo` varchar(255) NOT NULL,
+  `pass` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `admin`
+--
+
+INSERT INTO `admin` (`id`, `pseudo`, `pass`) VALUES
+(1, 'admin', '$2y$10$Pk4Z6n56Xf2A.F84ijJ0E.39H1MmWrTPBUHT2eUv7ggtEHP2asW.q');
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `blog`
 --
 
@@ -36,6 +55,25 @@ CREATE TABLE `blog` (
   `post_date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Déchargement des données de la table `blog`
+--
+
+INSERT INTO `blog` (`id`, `categorie`, `title`, `post`, `post_date`) VALUES
+(1, 1, 'Article 1', '<p>In arcu odio, consequat sit amet sollicitudin eu, faucibus sollicitudin sapien. Etiam vel massa a dolor pretium finibus. Nam tincidunt diam magna, id gravida orci egestas nec. Curabitur id nunc ipsum. Mauris sagittis id dolor quis euismod. Donec at dictum tortor. Duis pulvinar vulputate laoreet. Praesent quis arcu libero. Mauris faucibus libero et arcu fermentum, sit amet iaculis quam pulvinar</p>', '2018-08-18 00:00:00'),
+(2, 1, 'Article 2', '<p>Curabitur id nunc ipsum. Mauris sagittis id dolor quis euismod. Donec at dictum tortor. Duis pulvinar vulputate laoreet. Praesent quis arcu libero. Mauris faucibus libero et arcu fermentum, sit amet iaculis quam pulvinar. Ut sed nibh at enim pulvinar interdum vel condimentum felis. Vestibulum tristique posuere neque. Aenean eleifend, nisi non pellentesque interdum, felis felis lobortis nisi, vitae imperdiet magna nunc laoreet metus. Sed nec metus eget lacus porta mollis non nec nibh</p>', '2018-08-19 00:00:00'),
+(3, 1, 'Article 3', '<p>In arcu odio, consequat sit amet sollicitudin eu, faucibus sollicitudin sapien. Etiam vel massa a dolor pretium finibus. Nam tincidunt diam magna, id gravida orci egestas nec. Curabitur id nunc ipsum. Mauris sagittis id dolor quis euismod. Donec at dictum tortor. Duis pulvinar vulputate laoreet. Praesent quis arcu libero. Mauris faucibus libero et arcu fermentum, sit amet iaculis quam pulvinar</p>', '2018-08-18 00:00:00'),
+(4, 2, 'Article 4', '<p>Curabitur id nunc ipsum. Mauris sagittis id dolor quis euismod. Donec at dictum tortor. Duis pulvinar vulputate laoreet. Praesent quis arcu libero. Mauris faucibus libero et arcu fermentum, sit amet iaculis quam pulvinar. Ut sed nibh at enim pulvinar interdum vel condimentum felis. Vestibulum tristique posuere neque. Aenean eleifend, nisi non pellentesque interdum, felis felis lobortis nisi, vitae imperdiet magna nunc laoreet metus. Sed nec metus eget lacus porta mollis non nec nibh</p>', '2018-08-19 00:00:00'),
+(5, 2, 'Article 5', '<p>In arcu odio, consequat sit amet sollicitudin eu, faucibus sollicitudin sapien. Etiam vel massa a dolor pretium finibus. Nam tincidunt diam magna, id gravida orci egestas nec. Curabitur id nunc ipsum. Mauris sagittis id dolor quis euismod. Donec at dictum tortor. Duis pulvinar vulputate laoreet. Praesent quis arcu libero. Mauris faucibus libero et arcu fermentum, sit amet iaculis quam pulvinar</p>', '2018-08-18 00:00:00'),
+(6, 1, 'Article 6', '<p>Curabitur id nunc ipsum. Mauris sagittis id dolor quis euismod. Donec at dictum tortor. Duis pulvinar vulputate laoreet. Praesent quis arcu libero. Mauris faucibus libero et arcu fermentum, sit amet iaculis quam pulvinar. Ut sed nibh at enim pulvinar interdum vel condimentum felis. Vestibulum tristique posuere neque. Aenean eleifend, nisi non pellentesque interdum, felis felis lobortis nisi, vitae imperdiet magna nunc laoreet metus. Sed nec metus eget lacus porta mollis non nec nibh</p>', '2018-08-19 00:00:00'),
+(7, 2, 'Article 7', '<p>In arcu odio, consequat sit amet sollicitudin eu, faucibus sollicitudin sapien. Etiam vel massa a dolor pretium finibus. Nam tincidunt diam magna, id gravida orci egestas nec. Curabitur id nunc ipsum. Mauris sagittis id dolor quis euismod. Donec at dictum tortor. Duis pulvinar vulputate laoreet. Praesent quis arcu libero. Mauris faucibus libero et arcu fermentum, sit amet iaculis quam pulvinar</p>', '2018-08-18 00:00:00'),
+(8, 3, 'Article 8', '<p>Curabitur id nunc ipsum. Mauris sagittis id dolor quis euismod. Donec at dictum tortor. Duis pulvinar vulputate laoreet. Praesent quis arcu libero. Mauris faucibus libero et arcu fermentum, sit amet iaculis quam pulvinar. Ut sed nibh at enim pulvinar interdum vel condimentum felis. Vestibulum tristique posuere neque. Aenean eleifend, nisi non pellentesque interdum, felis felis lobortis nisi, vitae imperdiet magna nunc laoreet metus. Sed nec metus eget lacus porta mollis non nec nibh</p>', '2018-08-19 00:00:00'),
+(15, 4, 'trest', '<p>hgfhfg</p>', '2018-09-09 19:28:25'),
+(16, 1, 'test1111', '<p><strong>aahahahah</strong></p>', '2018-09-09 19:32:13'),
+(17, 3, 'test', '<p>test</p>', '2018-09-09 19:34:40'),
+(20, 28, 'kjljkl', '<p>l</p>', '2018-09-09 20:09:50'),
+(21, 1, 'que posuere neq', '<p>urabitur id nunc ipsu<strong>m. Mauris sagittis id dolor quis eui</strong>smod. Donec at dic<em>tum tortor. Duis pulvinar vulputate laoreet. Praesent</em> quis arcu libero. Mauris faucibus libero et arcu fermentum, sit amet iaculis quam pulvinar.</p>\r\n<p>U<strong>t sed nibh at enim pulvinar interdum vel condimentum felis. Vest</strong>ibulum tristique posuere neq</p>', '2018-09-09 23:36:09');
+
 -- --------------------------------------------------------
 
 --
@@ -46,6 +84,19 @@ CREATE TABLE `categorie` (
   `id` tinyint(4) NOT NULL,
   `name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `categorie`
+--
+
+INSERT INTO `categorie` (`id`, `name`) VALUES
+(1, 'Sans catégorie'),
+(2, 'Roman'),
+(3, 'Film'),
+(4, 'test4'),
+(28, 'test5'),
+(29, 'test6'),
+(30, 'test7');
 
 -- --------------------------------------------------------
 
@@ -64,8 +115,41 @@ CREATE TABLE `comment` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
+-- Déchargement des données de la table `comment`
+--
+
+INSERT INTO `comment` (`id`, `post_id`, `mail`, `author`, `comment`, `comment_date`, `report`) VALUES
+(1, 1, '', 'gfdh@hgfhfs.fr', 'Donec at dictum tortor. Duis pulvinar vulputate laoreet. Praesent quis arcu libero.', '2018-08-20 00:00:00', 0),
+(2, 2, '', 'gfdh@hgfhfs.fr', 'Donec at dictum tortor. Duis pulvinar vulputate laoreet. Praesent quis arcu libero.Donec at dictum tortor. Duis pulvinar vulputate laoreet. Praesent quis arcu libero.', '2018-08-20 00:00:00', 0),
+(3, 1, '', 'hfgh', 'hgfh', '2018-08-28 20:35:07', 0),
+(4, 2, '', 'hfgh', 'hfgh', '2018-08-28 20:35:14', 0),
+(5, 8, '', 'jhg', 'hgjgh', '2018-08-28 21:12:34', 0),
+(6, 8, '', 'hfg', 'hfgh', '2018-08-29 00:07:10', 1),
+(7, 8, '', 'hgjgh', 'ghjgh', '2018-08-29 11:48:53', 0),
+(8, 7, '', 'chdf', 'hfghfg', '2018-08-29 11:49:41', 1),
+(9, 2, '', 'jhgkjg', 'ikuk', '2018-08-29 14:53:51', 0),
+(10, 6, '', 'gdfg', 'fdg', '2018-09-01 23:16:33', 1),
+(11, 6, '', 'gdfg', 'gdfgdf', '2018-09-01 23:17:03', 1),
+(12, 8, '', 'jghd', 'jhgjgh', '2018-09-03 01:26:11', 0),
+(13, 8, '', 'jghjgh', 'jhgjgh', '2018-09-03 11:43:16', 0),
+(14, 8, 'hkkh', 'khjk', 'khjk', '2018-09-04 19:39:26', 0),
+(15, 8, 'jghjgh', 'jghjg', 'jghjg', '2018-09-04 19:39:30', 0),
+(16, 8, 'gdfgd', 'fdgdf', 'gfdg', '2018-09-04 19:40:23', 0),
+(17, 8, 'hfghfg@dsq.fr', 'gfhfg', 'hgfh', '2018-09-05 02:19:53', 2),
+(18, 8, 'fgdsf@de.fr', 'gfhfgh', 'Curabitur id nunc ipsum. Mauris sagittis id dolor quis euismod. Donec at dictum tortor. Duis pulvinar vulputate laoreet. Praesent quis arcu libero. Mauris faucibus libero et arcu fermentum, sit amet iaculis quam pulvinar. Ut sed nibh at enim pulvinar interdum vel condimentum felis. Vestibulum tristique posuere neque. Aenean eleifend, nisi non pellentesque interdum, felis felis lobortis nisi, vitae imperdiet magna nunc laoreet metus. Sed nec metus eget lacus porta mollis non nec nibhCurabitur id nunc ipsum. Mauris sagittis id dolor quis euismod. Donec at dictum tortor. Duis pulvinar vulputate laoreet. Praesent quis arcu libero. Mauris faucibus libero et arcu fermentum, sit amet iaculis quam pulvinar. Ut sed nibh at enim pulvinar interdum vel condimentum felis. Vestibulum tristique posuere neque. Aenean eleifend, nisi non pellentesque interdum, felis felis lobortis nisi, vitae imperdiet magna nunc laoreet metus. Sed nec metus eget lacus porta mollis non nec nibh', '2018-09-05 18:15:21', 0),
+(19, 8, 'jhdgjhg@frf.fr', 'kjhfkjhfkfhjgfdj', 'jdhgjgdhj', '2018-09-05 18:18:53', 4),
+(20, 8, 'gfdgd@fgrd.fr', 'kjhfkjhfkfhjgfdjkjhfkjhfkfhjgfdj', 'kjhfkjhfkfhjgfdj', '2018-09-05 18:19:08', 4),
+(22, 3, 'hgfhfg@gfdg.dfr', 'bvn', 'nbvnvb', '2018-09-09 21:40:58', 1);
+
+--
 -- Index pour les tables déchargées
 --
+
+--
+-- Index pour la table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `blog`
@@ -90,22 +174,28 @@ ALTER TABLE `comment`
 --
 
 --
+-- AUTO_INCREMENT pour la table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT pour la table `blog`
 --
 ALTER TABLE `blog`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT pour la table `categorie`
 --
 ALTER TABLE `categorie`
-  MODIFY `id` tinyint(4) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` tinyint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT pour la table `comment`
 --
 ALTER TABLE `comment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

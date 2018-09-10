@@ -168,12 +168,11 @@
                 <p class="carousel-item <?php if ($x == 1) {
                 echo 'active';
             } ?> text-center p-4">
-                    <strong>
+                    <strong title="<?= $spam['mail']; ?>">
                         <?= $spam['author']; ?></strong>
-                    <i>(
-                        <?= $spam['creation_date_fr']; ?>)</i><br />
+                    <i>(<?= $spam['creation_date_fr']; ?>)</i><br />
                     <?= $spam['comment']; ?><br /><br />
-                    <span class="text-danger">Reporter
+                    <span class="text-danger">Reporté
                         <?= $spam['report']; ?> fois</span><br /><br />
                     <span class="d-flex justify-content-around">
                         <a href="index.php?action=deleteComment&amp;id=<?= $spam['id']; ?>"><i

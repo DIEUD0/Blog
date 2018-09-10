@@ -132,3 +132,30 @@ function approuveComment($commentId)
         header('Location: index.php?page=admin');
     }
 }
+
+function showLogin()
+{
+    require('views/frontend/loginView.php');
+}
+
+function tryLogin($pseudo, $pass)
+{
+    $adminManager = new \OpenClassrooms\Projet4\Blog\AdminManager();
+    
+    $affectedLines = $adminManager->checkLogin($pseudo, $pass);
+
+    if ($affectedLines === false) {
+        throw new Exception('Identifiant incorrect');
+    } else {
+        session_start();
+        $_SESSION['pseudo'] = $pseudo;
+        header('Location: index.php?page=admin');
+    }
+}
+
+function logOut()
+{
+    $_SESSION = array();
+    session_destroy();
+    header('Location: index.php');
+}

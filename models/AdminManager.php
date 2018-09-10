@@ -61,7 +61,7 @@ class AdminManager extends Manager
     public function getSpam()
     {
         $req = $this->_db->query('
-        SELECT id, post_id, author, comment, report, DATE_FORMAT(comment_date, \'%d/%m/%Y\') AS creation_date_fr
+        SELECT id, post_id, author, mail, comment, report, DATE_FORMAT(comment_date, \'%d/%m/%Y\') AS creation_date_fr
         FROM comment
         WHERE report > 1
         ORDER BY report DESC
@@ -84,5 +84,17 @@ class AdminManager extends Manager
         $affectedLines = $post->execute(array($commentId));
 
         return $affectedLines;
+    }
+
+    public function checkLogin($pseudo, $pass)
+    {
+        $req = $this->_db->prepare('SELECT pseudo, pass FROM admin WHERE pseudo = ?');
+        $req->execute(array($pseudo));
+        $resultat = $req->fetch();
+        if (password_verify($pass, $resultat['pass'])) {
+            return $resultat;
+        } else {
+            return false;
+        }
     }
 }

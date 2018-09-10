@@ -143,3 +143,13 @@ a.none {
     -moz-border-radius: inherit;
     border-radius: inherit;
 }
+
+.form-login {
+    max-width: 300px;
+    padding-top: 4px;
+    margin: 0 auto 16px auto;
+}
+
+.form-login > input, .form-login > buttton {
+    margin : 8px;
+}
