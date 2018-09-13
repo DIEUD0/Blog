@@ -1,7 +1,8 @@
         tinymce.init({
             selector: '#tinymce',
             language_url : './public/js/fr_FR.js',
-            menubar: false,
+			menubar: false,
+			content_style: '#tinymce {margin: 12px 24px; padding: 0; font-size: 1.1em;}',
             plugins: [
               'advlist autolink lists link image charmap print preview anchor textcolor',
               'searchreplace visualblocks code fullscreen',

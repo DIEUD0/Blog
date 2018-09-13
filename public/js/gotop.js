@@ -1,18 +1,18 @@
 var Gotop = {
-    myClass: $('#go-top'),
+    myId: $('#go-top'),
     offset: 128,
     duration: 256,
     init: function () {
         $(window).scroll(function () {
             if ($(window).scrollTop() > this.offset) {
-                this.myClass.fadeIn(this.duration);
+                this.myId.fadeIn(this.duration);
 
             } else {
-                this.myClass.fadeOut(this.duration);
+                this.myId.fadeOut(this.duration);
             }
         }.bind(this));
 
-        this.myClass.click(function (event) {
+        this.myId.click(function (event) {
             event.preventDefault();
             $('html, body').animate({
                 scrollTop: 0

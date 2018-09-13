@@ -7,88 +7,91 @@ require_once('models/ContactManager.php');
 
 function showBlog($pageId, $catId = '')
 {
-    $blogManager = new \OpenClassrooms\Projet4\Blog\BlogManager();
+	$blogManager = new \OpenClassrooms\Projet4\Blog\BlogManager();
 
-    //param set
-    $setPage = $blogManager->setParameter($pageId);
-    $setCat = $blogManager->setCategoryId($catId);
-    $setTotalPosts = $blogManager->setTotalPosts();
-    //param get
-    $pageIndex = $blogManager->getParameter();
-    $categoryId = $blogManager->getCategoryId();
-    $totalPosts = $blogManager->getTotalPosts();
-    
-    //page
-    $posts = $blogManager->getPosts();
-    $pagination = $blogManager->getPagination();
-    //sidebar
-    $categoryName = $blogManager->getCategoryName();
-    $catSidebar = $blogManager->getCategorySideBar();
-    $totalComments = $blogManager->getTotalComments();
+	//param set
+	$setPage = $blogManager->setParameter($pageId);
+	$setCat = $blogManager->setCategoryId($catId);
+	$setTotalPosts = $blogManager->setTotalPosts();
+	//param get
+	$pageIndex = $blogManager->getParameter();
+	$categoryId = $blogManager->getCategoryId();
+	$totalPosts = $blogManager->getTotalPosts();
+	
+	//page
+	$posts = $blogManager->getPosts();
+	$pagination = $blogManager->getPagination();
+	//sidebar
+	$categoryName = $blogManager->getCategoryName();
+	$catSidebar = $blogManager->getCategorySideBar();
+	$totalComments = $blogManager->getTotalComments();
 
-    require('views/frontend/blogView.php');
+	require('views/frontend/blogView.php');
 }
 
-function showPost($postId)
+function showPost($postId, $status = '')
 {
-    $postManager = new \OpenClassrooms\Projet4\Blog\PostManager();
+	$postManager = new \OpenClassrooms\Projet4\Blog\PostManager();
 
-    $post = $postManager->getPost($postId);
-    $comments = $postManager->getComments($postId);
+	$setStatus = $postManager->setStatus($status);
+	$status = $postManager->getStatus();
 
-    require('views/frontend/postView.php');
+	$post = $postManager->getPost($postId);
+	$comments = $postManager->getComments($postId);
+
+	require('views/frontend/postView.php');
 }
 
 function addComment($postId, $mail, $author, $comment)
 {
-    $postManager = new \OpenClassrooms\Projet4\Blog\PostManager();
+	$postManager = new \OpenClassrooms\Projet4\Blog\PostManager();
 
-    $affectedLines = $postManager->postComment($postId, $mail, $author, $comment);
+	$affectedLines = $postManager->postComment($postId, $mail, $author, $comment);
 
-    if ($affectedLines === false) {
-        throw new Exception('Impossible d\'ajouter le commentaire !');
-    } else {
-        header('Location: index.php?page=post&id=' . $postId);
-    }
+	if ($affectedLines === false) {
+		throw new Exception('Impossible d\'ajouter le commentaire !');
+	} else {
+		header('Location: index.php?page=post&id=' . $postId);
+	}
 }
 
 function reportComment($postId, $commentId)
 {
-    $postManager = new \OpenClassrooms\Projet4\Blog\PostManager();
+	$postManager = new \OpenClassrooms\Projet4\Blog\PostManager();
 
-    $affectedLines = $postManager->reportComment($commentId);
+	$affectedLines = $postManager->reportComment($commentId);
 
-    if ($affectedLines === false) {
-        throw new Exception('Impossible de reporter le commentaire !');
-    } else {
-        header('Location: index.php?page=post&id=' . $postId . '&report=ok');
-    }
+	if ($affectedLines === false) {
+		throw new Exception('Impossible de reporter le commentaire !');
+	} else {
+		header('Location: index.php?page=post&id=' . $postId . '&report=ok');
+	}
 }
 
 function showAbout()
 {
-    require('views/frontend/aboutView.php');
+	require('views/frontend/aboutView.php');
 }
 
 function showContact($status = '')
 {
-    $contactManager = new \OpenClassrooms\Projet4\Blog\ContactManager();
-    
-    $setStatus = $contactManager->setStatus($status);
-    $status = $contactManager->getStatus();
+	$contactManager = new \OpenClassrooms\Projet4\Blog\ContactManager();
+	
+	$setStatus = $contactManager->setStatus($status);
+	$status = $contactManager->getStatus();
 
-    require('views/frontend/contactView.php');
+	require('views/frontend/contactView.php');
 }
 
 function sendMail($subject, $comment, $mail)
 {
-    $contactManager = new \OpenClassrooms\Projet4\Blog\ContactManager();
-    
-    $sendIt = $contactManager->sendMail($subject, $comment, $mail);
-    
-    if ($sendIt === false) {
-        throw new Exception('Impossible d\'envoyer l\'email !');
-    } else {
-        header('Location: index.php?page=contact&status=sended');
-    }
+	$contactManager = new \OpenClassrooms\Projet4\Blog\ContactManager();
+	
+	$sendIt = $contactManager->sendMail($subject, $comment, $mail);
+	
+	if ($sendIt === false) {
+		throw new Exception('Impossible d\'envoyer l\'email !');
+	} else {
+		header('Location: index.php?page=contact&status=sended');
+	}
 }

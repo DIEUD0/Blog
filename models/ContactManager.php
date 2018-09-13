@@ -6,31 +6,31 @@ require_once("models/Manager.php");
 
 class ContactManager extends Manager
 {
-    private $_db;
-    private $_myMail;
-    private $_status;
+	private $_db;
+	private $_myMail;
+	private $_status;
 
-    public function __construct()
-    {
-        $this->_db = $this->dbConnect();
-        global $CONTACTMAIL;
-        $this->_myMail = $CONTACTMAIL;
-    }
+	public function __construct()
+	{
+		$this->_db = $this->dbConnect();
+		global $CONTACTMAIL;
+		$this->_myMail = $CONTACTMAIL;
+	}
 
-    public function setStatus($status)
-    {
-        $this->_status = $status;
-    }
+	public function setStatus($status)
+	{
+		$this->_status = $status;
+	}
 
-    public function getStatus()
-    {
-        return $this->_status;
-    }
+	public function getStatus()
+	{
+		return $this->_status;
+	}
 
-    public function sendMail($subject, $comment, $mail)
-    {
-        $headers = 'Reply-To:' .$mail. "\r\n";
-        $headers .= 'From:' .$mail. "\r\n";
-        $send = mail($this->_myMail, $subject, $comment, $headers);
-    }
+	public function sendMail($subject, $comment, $mail)
+	{
+		$headers = 'Reply-To:' .$mail. "\r\n";
+		$headers .= 'From:' .$mail. "\r\n";
+		$send = mail($this->_myMail, $subject, $comment, $headers);
+	}
 }
