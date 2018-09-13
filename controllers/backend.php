@@ -96,6 +96,7 @@ function delPost($postId)
 	$adminManager = new \OpenClassrooms\Projet4\Blog\AdminManager();
 
 	$affectedLines = $adminManager->delPost($postId);
+	$delcomment = $adminManager->delPostComment($postId);
 
 	if ($affectedLines === false) {
 		throw new Exception('Impossible de supprimer le post !');

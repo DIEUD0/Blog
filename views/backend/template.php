@@ -37,7 +37,7 @@ $activeScreenReader = ' <span class="sr-only">(Page actuelle)</span>';
 					if (isset($_GET['page']) && $_GET['page'] == 'admin') {
 						echo $activeMenu;
 					} ?>">
-					<a class="nav-link" href="index.php?page=admin">Accueil Administration
+					<a class="nav-link" href="index.php?page=admin">Administration
 						<?php
 						if (isset($_GET['page']) && $_GET['page'] == 'admin') {
 							echo $activeScreenReader;

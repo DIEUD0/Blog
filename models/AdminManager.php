@@ -69,6 +69,14 @@ class AdminManager extends Manager
 		return $affectedLines;
 	}
 
+	public function delPostComment($postId)
+	{
+		$post = $this->_db->prepare('DELETE FROM comment WHERE post_id=?');
+		$affectedLines = $post->execute(array($postId));
+
+		return $affectedLines;
+	}
+
 	public function getSpam()
 	{
 		$req = $this->_db->query('
