@@ -10,7 +10,7 @@ $activeScreenReader = ' <span class="sr-only">(Page actuelle)</span>';
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<?= '<title>' . $title . ' - ' . $TITLEND . '</title>' . "\r\n"; ?>
+	<?= '<title>' . $title . ' - ' . $TITLEND . '</title>' . "\n"; ?>
 	<link rel="stylesheet" href="//stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 	<link rel="stylesheet" href="./public/css/style.css" />
 	<link rel="icon" type="image/x-icon" href="./public/images/favicon.ico" />
@@ -31,10 +31,10 @@ $activeScreenReader = ' <span class="sr-only">(Page actuelle)</span>';
 		<nav class="navbar navbar-expand navbar-light bg-light">
 			<ul class="navbar-nav mx-auto">
 				<li class="nav-item
-					<?php
-					if (empty($_GET['page']) || $_GET['page'] == 'blog' || $_GET['page'] == 'category' || $_GET['page'] == 'post') {
-						echo $activeMenu;
-					} ?>">
+				<?php
+				if (empty($_GET['page']) || $_GET['page'] == 'blog' || $_GET['page'] == 'category' || $_GET['page'] == 'post') {
+					echo $activeMenu;
+				} ?>">
 					<a class="nav-link" href="index.php">Blog
 						<?php
 						if (empty($_GET['page']) || $_GET['page'] == 'blog' || $_GET['page'] == 'category' || $_GET['page'] == 'post') {
@@ -43,10 +43,10 @@ $activeScreenReader = ' <span class="sr-only">(Page actuelle)</span>';
 					</a>
 				</li>
 				<li class="nav-item
-					<?php
-					if (isset($_GET['page']) && $_GET['page'] == 'about') {
-						echo $activeMenu;
-					} ?>">
+				<?php
+				if (isset($_GET['page']) && $_GET['page'] == 'about') {
+					echo $activeMenu;
+				} ?>">
 					<a class="nav-link" href="index.php?page=about">À propos
 						<?php
 						if (isset($_GET['page']) && $_GET['page'] == 'about') {
@@ -55,10 +55,10 @@ $activeScreenReader = ' <span class="sr-only">(Page actuelle)</span>';
 					</a>
 				</li>
 				<li class="nav-item
-					<?php
-					if (isset($_GET['page']) && $_GET['page'] == 'contact') {
-						echo $activeMenu;
-					} ?>">
+				<?php
+				if (isset($_GET['page']) && $_GET['page'] == 'contact') {
+					echo $activeMenu;
+				} ?>">
 					<a class="nav-link" href="index.php?page=contact">Contact
 						<?php
 						if (isset($_GET['page']) && $_GET['page'] == 'contact') {

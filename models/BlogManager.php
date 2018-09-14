@@ -11,13 +11,17 @@ class BlogManager extends Manager
 	private $_categoryId;
 	private $_postsPerPage;
 	private $_totalPosts;
-	private $_adminView;
 
 	public function __construct()
 	{
 		$this->_db = $this->dbConnect();
 		global $POSTSPERPAGE;
 		$this->_postsPerPage = $POSTSPERPAGE;
+	}
+
+	public function setAdminPagination()
+	{
+		$this->_postsPerPage =  $this->_postsPerPage * 2;
 	}
 
 	public function setParameter($parameter)
@@ -28,12 +32,6 @@ class BlogManager extends Manager
 	public function setCategoryId($parameter)
 	{
 		$this->_categoryId = (int) $parameter;
-	}
-
-	public function setAdminView()
-	{
-		$this->_adminView = true;
-		$this->_postsPerPage =  $this->_postsPerPage * 2;
 	}
 
 	public function setTotalPosts()
@@ -51,18 +49,6 @@ class BlogManager extends Manager
 		}
 	}
 
-	public function getTotalPosts()
-	{
-		return $this->_totalPosts;
-	}
-
-	public function getPagination()
-	{
-		$pagi  = ceil($this->_totalPosts / $this->_postsPerPage);
-
-		return $pagi;
-	}
-
 	public function getParameter()
 	{
 		return $this->_parameter;
@@ -71,6 +57,11 @@ class BlogManager extends Manager
 	public function getCategoryId()
 	{
 		return $this->_categoryId;
+	}
+
+	public function getTotalPosts()
+	{
+		return $this->_totalPosts;
 	}
 
 	public function getPosts()
@@ -87,6 +78,13 @@ class BlogManager extends Manager
 
 			return $req;
 		}
+	}
+
+	public function getPagination()
+	{
+		$pagi  = ceil($this->_totalPosts / $this->_postsPerPage);
+
+		return $pagi;
 	}
 
 	public function getCategoryName()

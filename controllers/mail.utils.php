@@ -2,7 +2,7 @@
 
 function verify_mail($mail)
 {
-	return !!filter_var($mail, FILTER_VALIDATE_EMAIL);
+	return filter_var($mail, FILTER_VALIDATE_EMAIL);
 }
 
 function sanitize_mail($mail)

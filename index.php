@@ -5,7 +5,7 @@ require('controllers/backend.php');
 require('controllers/mail.utils.php');
 
 try {
-	if (isset($_GET['page'])) { // PAGE
+	if (isset($_GET['page'])) { // PAGE PUBLIC
 		if ($_GET['page'] == 'blog') {
 			if (isset($_GET['cat']) && $_GET['cat'] > 0 && isset($_GET['id']) && $_GET['id'] > 0) {
 				showBlog($_GET['id'], $_GET['cat']);
@@ -61,7 +61,7 @@ try {
 		} else {
 			throw new Exception('Veuillez vous connecter');
 		}
-	} elseif (isset($_GET['action'])) { // ACTION
+	} elseif (isset($_GET['action'])) { // ACTION PUBLIC
 		if ($_GET['action'] == 'addComment') {
 			if (isset($_GET['id']) && $_GET['id'] > 0) {
 				if (!empty($_POST['mail']) && !empty($_POST['author']) && !empty($_POST['comment'])) {
@@ -80,7 +80,7 @@ try {
 			if (!empty($_GET['post']) && !empty($_GET['id'])) {
 				reportComment($_GET['post'], $_GET['id']);
 			} else {
-				throw new Exception('Aucun commentaire choisi');
+				throw new Exception('Aucun identifiant de commentaire envoyé');
 			}
 		} elseif ($_GET['action'] == 'sendMail') {
 			if (!empty($_POST['subject']) && !empty($_POST['comment']) && !empty($_POST['mail'])) {
@@ -111,24 +111,6 @@ try {
 				} else {
 					throw new Exception('Aucune catégorie choisie');
 				}
-			} elseif ($_GET['action'] == 'addPost') {
-				if (!empty($_POST['cat']) && !empty($_POST['title']) && !empty($_POST['post'])) {
-					addPost($_POST['cat'], $_POST['title'], $_POST['post']);
-				} else {
-					throw new Exception('Problème d\'ajout de billet');
-				}
-			} elseif ($_GET['action'] == 'editPost') {
-				if (!empty($_GET['id'])) {
-					editPost($_GET['id']);
-				} else {
-					throw new Exception('Aucun billet choisi');
-				}
-			} elseif ($_GET['action'] == 'delPost') {
-				if (!empty($_GET['id'])) {
-					delPost($_GET['id']);
-				} else {
-					throw new Exception('Aucun billet choisi');
-				}
 			} elseif ($_GET['action'] == 'approuveComment') {
 				if (!empty($_GET['id'])) {
 					approuveComment($_GET['id']);
@@ -140,6 +122,24 @@ try {
 					deleteComment($_GET['id']);
 				} else {
 					throw new Exception('Aucun commentaire choisi');
+				}
+			} elseif ($_GET['action'] == 'addPost') {
+				if (!empty($_POST['cat']) && !empty($_POST['title']) && !empty($_POST['post'])) {
+					addPost($_POST['cat'], $_POST['title'], $_POST['post']);
+				} else {
+					throw new Exception('Problème d\'ajout de billet');
+				}
+			} elseif ($_GET['action'] == 'editPost') {
+				if (!empty($_GET['id']) && !empty($_POST['cat']) && !empty($_POST['title']) && !empty($_POST['post'])) {
+					editPost($_POST['cat'], $_POST['title'], $_POST['post'], $_GET['id']);
+				} else {
+					throw new Exception('Aucun billet choisi');
+				}
+			} elseif ($_GET['action'] == 'delPost') {
+				if (!empty($_GET['id'])) {
+					delPost($_GET['id']);
+				} else {
+					throw new Exception('Aucun billet choisi');
 				}
 			} elseif ($_GET['action'] == 'logout') {
 				logOut();

@@ -56,17 +56,15 @@
 			</table>
 		</div>
 
-		<?php //If there's 2+ pages to show
+		<?php
 		if ($pagination > 1) {
 			?>
 		<ul class="pagination justify-content-center">
-
 			<li class="page-item 
 			<?php
 			if ($pageIndex == 1) {
 				echo 'disabled';
-			} ?>
-			">
+			} ?>">
 				<?php if (!empty($categoryId)): ?>
 				<a class="page-link" href="index.php?page=admin&amp;cat=<?= $categoryId; ?>&amp;id=<?= $pageIndex - 1; ?>">
 					<i class="fas fa-chevron-left"></i> &nbsp; Précédent
@@ -80,30 +78,28 @@
 
 			<?php
 			for ($i = 1; $i <= $pagination; $i++) {
-				echo '<li class="page-item';
-				if ($pageIndex == $i) {
-					echo ' active';
-				}
-				echo '">';
-				echo '<a class="page-link" href="index.php?page=';
-				if (empty($categoryId)) {
-					echo 'admin&amp;id=' . $i . '">' . $i;
-				} else {
-					echo 'admin&amp;cat=' . $categoryId . '&amp;id=' . $i . '">' . $i;
-				}
-				if ($pageIndex == $i) {
-					echo ' <span class="sr-only">(current)</span>';
-				}
-				echo '</a>';
-				echo '</li>';
+				?>
+			<li class="page-item
+			<?php if ($pageIndex == $i) {
+					echo 'active';
+				} ?>">
+				<a class="page-link" href="index.php?page=admin
+				<?php if (empty($categoryId)): ?>
+					<?= '&amp;id='.$i ?>
+				<?php else: ?>
+					<?= '&amp;cat='.$categoryId.'&amp;id='.$i ?>
+				<?php endif; ?>">
+					<?= $i ?>
+				</a>
+			</li>
+			<?php
 			} ?>
 
 			<li class="page-item 
 			<?php
 			if ($pageIndex == $pagination) {
 				echo 'disabled';
-			} ?>
-			">
+			} ?>">
 				<?php if (!empty($categoryId)): ?>
 				<a class="page-link" href="index.php?page=admin&amp;cat=<?= $categoryId; ?>&amp;id=<?= $pageIndex + 1; ?>">
 					Suivant &nbsp; <i class="fas fa-chevron-right"></i>
@@ -114,7 +110,6 @@
 				</a>
 				<?php endif; ?>
 			</li>
-
 		</ul>
 		<?php
 		} ?>
@@ -122,7 +117,6 @@
 </article>
 
 <aside class="col-lg-4">
-
 	<div>
 		<p class="asidetitle">Catégories</p>
 		<ul class="list-group">
@@ -137,24 +131,22 @@
 				<a href="./index.php?page=admin&amp;cat=<?= $category['id'] ?>">
 					<?= $category['name'] ?>
 				</a>
-				<?php else: //If 0 post in this cat, no href link?>
+				<?php else: ?>
 				<?= $category['name'] ?>
 				<?php endif; ?>
+
 				<span class="badge badge-pill
-				<?php
-				if (!empty($categoryId) && $categoryId == $category['id']) {
-					echo 'badge-success';
-				} else {
-					echo 'badge-primary';
-				} ?>
-            	">
+				<?php if (!empty($categoryId) && $categoryId == $category['id']): ?>
+					badge-success
+				<?php else: ?>
+					badge-primary
+				<?php endif; ?>">
 					<?= $category['total'] ?>
 				</span>
 			</li>
 			<?php
 			} $catSidebar->closeCursor(); ?>
 		</ul>
-
 		<form action="index.php?action=addCategory" method="post">
 			<div class="input-group mb-3">
 				<input type="text" class="form-control" placeholder="Ajouter une catégorie" aria-label="Ajouter une catégorie" id="catName" name="catName">
@@ -171,22 +163,29 @@
 				<?php $x = 1;
 				while ($spam = $spamSidebar->fetch()) {
 					?>
-				<p title="<?= $spam['mail']; ?>" class="carousel-item <?php if ($x == 1) {
+				<div title="<?= $spam['mail']; ?>" class="<?php if ($x == 1) {
 						echo 'active';
-					} ?> text-center p-4">
-					<strong>
-						<?= $spam['author']; ?></strong>
-					<i>(
-						<?= $spam['creation_date_fr']; ?>)</i><br />
-					<?= $spam['comment']; ?><br /><br />
-					<span class="text-danger">Reporté
-						<?= $spam['report']; ?> fois</span><br /><br />
+					} ?> carousel-item text-center p-4">
+					<p>
+						<strong>
+							<?= $spam['author']; ?>
+						</strong>
+						<i>
+							<?= '('.$spam['creation_date_fr'].')' ?>
+						</i>
+					</p>
+					<p>
+						<?= $spam['comment']; ?>
+					</p>
+					<p class="text-danger">Reporté
+						<?= $spam['report']; ?> fois
+					</p>
 					<span class="d-flex justify-content-around">
 						<a href="index.php?action=deleteComment&amp;id=<?= $spam['id']; ?>"><i class="fa fa-times fa-2x text-danger"></i></a>
 						<a href="index.php?page=post&amp;id=<?= $spam['post_id'] . '#' . $spam['id']; ?>" target="_blank"><i class="fas fa-eye fa-2x"></i></a>
 						<a href="index.php?action=approuveComment&amp;id=<?= $spam['id']; ?>"><i class="fas fa-check fa-2x text-success "></i></a>
 					</span>
-				</p>
+				</div>
 				<?php $x++;
 				} ?>
 			</div>

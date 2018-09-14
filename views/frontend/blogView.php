@@ -35,13 +35,12 @@ if (!empty($categoryId)) {
 		<?php
 		if ($pageIndex == 1) {
 			echo 'disabled';
-		} ?> 
-		">
-			<?php if (!empty($categoryId)) : ?>
+		} ?>">
+			<?php if (!empty($categoryId)): ?>
 			<a class="page-link" href="index.php?page=blog&amp;cat=<?= $categoryId; ?>&amp;id=<?= $pageIndex - 1; ?>">
 				<i class="fas fa-chevron-left"></i> &nbsp; Précédent
 			</a>
-			<?php else : ?>
+			<?php else: ?>
 			<a class="page-link" href="index.php?page=blog&amp;id=<?= $pageIndex - 1; ?>">
 				<i class="fas fa-chevron-left"></i> &nbsp; Précédent
 			</a>
@@ -50,30 +49,28 @@ if (!empty($categoryId)) {
 
 		<?php
 		for ($i = 1; $i <= $pagination; $i++) {
-			echo '<li class="page-item';
-			if ($pageIndex == $i) {
-				echo ' active';
-			}
-			echo '">';
-			echo '<a class="page-link" href="index.php?page=blog';
-			if (empty($categoryId)) {
-				echo '&amp;id=' . $i . '">' . $i;
-			} else {
-				echo '&amp;cat=' . $categoryId . '&amp;id=' . $i . '">' . $i;
-			}
-			if ($pageIndex == $i) {
-				echo ' <span class="sr-only">(current)</span>';
-			}
-			echo '</a>';
-			echo '</li>';
+			?>
+		<li class="page-item
+		<?php if ($pageIndex == $i) {
+				echo 'active';
+			} ?>">
+			<a class="page-link" href="index.php?page=blog
+			<?php if (empty($categoryId)): ?>
+				<?= '&amp;id='.$i ?>
+			<?php else: ?>
+				<?= '&amp;cat='.$categoryId.'&amp;id='.$i ?>
+			<?php endif; ?>">
+				<?= $i ?>
+			</a>
+		</li>
+		<?php
 		} ?>
 
 		<li class="page-item 
 		<?php
 		if ($pageIndex == $pagination) {
 			echo 'disabled';
-		} ?>
-		">
+		} ?>">
 			<?php if (!empty($categoryId)): ?>
 			<a class="page-link" href="index.php?page=blog&amp;cat=<?= $categoryId; ?>&amp;id=<?= $pageIndex + 1; ?>">
 				Suivant &nbsp; <i class="fas fa-chevron-right"></i>
@@ -84,7 +81,6 @@ if (!empty($categoryId)) {
 			</a>
 			<?php endif; ?>
 		</li>
-
 	</ul>
 	<?php
 	} ?>
@@ -96,7 +92,6 @@ if (!empty($categoryId)) {
 		<img class="mx-auto d-block" src="./public/images/visage.png" alt="ma tete" />
 		<p>Prochain roman : Billet simple pour l'Alaska</p>
 	</div>
-
 	<div>
 		<p class="asidetitle">Catégories</p>
 		<ul class="list-group">
@@ -107,17 +102,14 @@ if (!empty($categoryId)) {
 				<li class="list-group-item d-flex justify-content-between align-items-center
 				<?php if (!empty($categoryId) && $categoryId == $category['id']) {
 					echo ' active bg-secondary';
-				} ?>
-                ">
+				} ?>">
 					<?= $category['name'] ?>
 					<span class="badge badge-pill
-					<?php
-					if (!empty($categoryId) && $categoryId == $category['id']) {
-						echo 'badge-light';
-					} else {
-						echo 'badge-primary';
-					} ?>
-                    ">
+					<?php if (!empty($categoryId) && $categoryId == $category['id']): ?>
+						badge-light
+					<?php else: ?>
+						badge-primary
+					<?php endif; ?>">
 						<?= $category['total'] ?>
 					</span>
 				</li>

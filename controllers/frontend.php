@@ -19,10 +19,10 @@ function showBlog($pageId, $catId = '')
 	$totalPosts = $blogManager->getTotalPosts();
 	
 	//page
+	$categoryName = $blogManager->getCategoryName();
 	$posts = $blogManager->getPosts();
 	$pagination = $blogManager->getPagination();
 	//sidebar
-	$categoryName = $blogManager->getCategoryName();
 	$catSidebar = $blogManager->getCategorySideBar();
 	$totalComments = $blogManager->getTotalComments();
 
@@ -33,9 +33,11 @@ function showPost($postId, $status = '')
 {
 	$postManager = new \OpenClassrooms\Projet4\Blog\PostManager();
 
+	//param
 	$setStatus = $postManager->setStatus($status);
-	$status = $postManager->getStatus();
+	$status = $postManager->getStatus(); // True if Comment Reported
 
+	//page
 	$post = $postManager->getPost($postId);
 	$comments = $postManager->getComments($postId);
 
@@ -78,7 +80,7 @@ function showContact($status = '')
 	$contactManager = new \OpenClassrooms\Projet4\Blog\ContactManager();
 	
 	$setStatus = $contactManager->setStatus($status);
-	$status = $contactManager->getStatus();
+	$status = $contactManager->getStatus(); // True if Mail Sended
 
 	require('views/frontend/contactView.php');
 }
@@ -93,5 +95,25 @@ function sendMail($subject, $comment, $mail)
 		throw new Exception('Impossible d\'envoyer l\'email !');
 	} else {
 		header('Location: index.php?page=contact&status=sended');
+	}
+}
+
+function showLogin()
+{
+	require('views/frontend/loginView.php');
+}
+
+function tryLogin($pseudo, $pass)
+{
+	$adminManager = new \OpenClassrooms\Projet4\Blog\AdminManager();
+	
+	$affectedLines = $adminManager->checkLogin($pseudo, $pass);
+
+	if ($affectedLines === false) {
+		throw new Exception('Identifiant incorrect');
+	} else {
+		session_start();
+		$_SESSION['pseudo'] = $pseudo;
+		header('Location: index.php?page=admin');
 	}
 }

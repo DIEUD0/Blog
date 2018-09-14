@@ -5,11 +5,13 @@ if ($status) {
 	$postitlevalue = $post['title'];
 	$postcontent = $post['post'];
 	$cat = $post['categorie'];
+	$action = 'index.php?action=editPost&amp;id=' . $post['id'];
 } else {
 	$postitle = 'Titre de l\'article';
 	$postitlevalue = '';
 	$postcontent = '';
 	$cat = '';
+	$action = 'index.php?action=addPost';
 }
 ?>
 
@@ -17,7 +19,7 @@ if ($status) {
 <article class="col-md-12">
 	<div class="text-center">
 		<h3>Création d'un nouveau billet :</h2>
-			<form class="formcomment" action="index.php?action=addPost" method="post">
+			<form class="formcomment" action="<?= $action ?>" method="post">
 				<div class="form-row">
 					<div class="col">
 						<input type="text" class="form-control" placeholder="<?= $postitle ?>" value="<?= $postitlevalue ?>" name="title">
