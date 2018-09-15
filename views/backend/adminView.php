@@ -123,24 +123,29 @@
 			<?php
 			while ($category = $catSidebar->fetch()) {
 				?>
-			<li class="list-group-item d-flex justify-content-between align-items-center">
-				<a href="./index.php?action=delCategory&amp;id=<?= $category['id'] ?>">
-					<i class="fa fa-times text-danger" aria-hidden="true"></i>
-				</a>
+			<li class="list-group-item d-flex justify-content-between align-items-center
+			<?php
+			if (!empty($categoryId) && $categoryId == $category['id']) {
+				echo ' active bg-secondary';
+			} ?>">
+				<span>
+					<a href="./index.php?action=delCategory&amp;id=<?= $category['id'] ?>">
+						<i class="fa fa-times text-danger" aria-hidden="true"></i>
+					</a>
+				</span>
 				<?php if ($category['total'] > 0): ?>
-				<a href="./index.php?page=admin&amp;cat=<?= $category['id'] ?>">
+				<a class="text-center" href="./index.php?page=admin&amp;cat=<?= $category['id'] ?>">
 					<?= $category['name'] ?>
 				</a>
 				<?php else: ?>
 				<?= $category['name'] ?>
 				<?php endif; ?>
-
 				<span class="badge badge-pill
-				<?php if (!empty($categoryId) && $categoryId == $category['id']): ?>
-					badge-success
-				<?php else: ?>
-					badge-primary
-				<?php endif; ?>">
+					<?php if (!empty($categoryId) && $categoryId == $category['id']): ?>
+						badge-light
+					<?php else: ?>
+						badge-primary
+					<?php endif; ?>">
 					<?= $category['total'] ?>
 				</span>
 			</li>

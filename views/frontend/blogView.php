@@ -98,22 +98,23 @@ if (!empty($categoryId)) {
 			<?php
 			while ($category = $catSidebar->fetch()) {
 				?>
-			<a href="./index.php?page=blog&amp;cat=<?= $category['id'] ?>">
-				<li class="list-group-item d-flex justify-content-between align-items-center
-				<?php if (!empty($categoryId) && $categoryId == $category['id']) {
-					echo ' active bg-secondary';
-				} ?>">
+			<li class="list-group-item d-flex justify-content-between align-items-center
+			<?php
+			if (!empty($categoryId) && $categoryId == $category['id']) {
+				echo ' active bg-secondary';
+			} ?>">
+				<a href="./index.php?page=blog&amp;cat=<?= $category['id'] ?>">
 					<?= $category['name'] ?>
-					<span class="badge badge-pill
+				</a>
+				<span class="badge badge-pill
 					<?php if (!empty($categoryId) && $categoryId == $category['id']): ?>
 						badge-light
 					<?php else: ?>
 						badge-primary
 					<?php endif; ?>">
-						<?= $category['total'] ?>
-					</span>
-				</li>
-			</a>
+					<?= $category['total'] ?>
+				</span>
+			</li>
 			<?php
 			} ?>
 		</ul>
