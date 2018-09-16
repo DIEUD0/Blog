@@ -1,10 +1,10 @@
 <?php
 if (!empty($categoryId)) {
 	$title = $categoryName;
-	$hrefpagi = '&amp;id=';
+	$hrefpagi = '&amp;cat='.$categoryId.'&amp;id=';
 } else {
 	$title = 'Accueil';
-	$hrefpagi = '&amp;cat='.$categoryId.'&amp;id=';
+	$hrefpagi = '&amp;id=';
 }
 ?>
 
@@ -56,7 +56,7 @@ if (!empty($categoryId)) {
 		<?php if ($pageIndex == $i) {
 				echo 'active';
 			} ?>">
-			<a class="page-link" href="index.php?page=blog<?= $hrefpagi + $i ?>">
+			<a class="page-link" href="index.php?page=blog<?= $hrefpagi,$i ?>">
 				<?= $i ?>
 			</a>
 		</li>
