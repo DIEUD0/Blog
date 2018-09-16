@@ -2,17 +2,13 @@
 
 namespace OpenClassrooms\Projet4\Blog;
 
-require_once("models/Manager.php");
-
-class ContactManager extends Manager
+class ContactManager
 {
-	private $_db;
 	private $_myMail;
 	private $_status;
 
 	public function __construct()
 	{
-		$this->_db = $this->dbConnect();
 		global $CONTACTMAIL;
 		$this->_myMail = $CONTACTMAIL;
 	}

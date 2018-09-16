@@ -24,7 +24,7 @@ class BlogManager extends Manager
 		$this->_postsPerPage =  $this->_postsPerPage * 2;
 	}
 
-	public function setParameter($parameter)
+	public function setParameter($parameter) // PAGE ID
 	{
 		$this->_parameter = (int) $parameter;
 	}
@@ -34,7 +34,7 @@ class BlogManager extends Manager
 		$this->_categoryId = (int) $parameter;
 	}
 
-	public function setTotalPosts()
+	public function setTotalPosts() // FOR PAGINATION
 	{
 		if (empty($this->_categoryId)) {
 			$req = $this->_db->query('SELECT COUNT(*) AS totalposts FROM blog');

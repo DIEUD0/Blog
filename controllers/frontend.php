@@ -113,7 +113,7 @@ function tryLogin($pseudo, $pass)
 		throw new Exception('Identifiant incorrect');
 	} else {
 		session_start();
-		$_SESSION['pseudo'] = $pseudo;
+		$_SESSION['pseudo'] = $affectedLines['pseudo'];
 		header('Location: index.php?page=admin');
 	}
 }

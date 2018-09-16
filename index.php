@@ -123,6 +123,12 @@ try {
 				} else {
 					throw new Exception('Aucun commentaire choisi');
 				}
+			} elseif ($_GET['action'] == 'delPost') {
+				if (!empty($_GET['id'])) {
+					delPost($_GET['id']);
+				} else {
+					throw new Exception('Aucun billet choisi');
+				}
 			} elseif ($_GET['action'] == 'addPost') {
 				if (!empty($_POST['cat']) && !empty($_POST['title']) && !empty($_POST['post'])) {
 					addPost($_POST['cat'], $_POST['title'], $_POST['post']);
@@ -132,12 +138,6 @@ try {
 			} elseif ($_GET['action'] == 'editPost') {
 				if (!empty($_GET['id']) && !empty($_POST['cat']) && !empty($_POST['title']) && !empty($_POST['post'])) {
 					editPost($_POST['cat'], $_POST['title'], $_POST['post'], $_GET['id']);
-				} else {
-					throw new Exception('Aucun billet choisi');
-				}
-			} elseif ($_GET['action'] == 'delPost') {
-				if (!empty($_GET['id'])) {
-					delPost($_GET['id']);
 				} else {
 					throw new Exception('Aucun billet choisi');
 				}
