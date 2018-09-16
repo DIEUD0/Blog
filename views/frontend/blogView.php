@@ -22,7 +22,7 @@ if (!empty($categoryId)) {
 		<?= htmlspecialchars_decode($post['post']) ?>
 		<p class="text-right">
 			<a href="index.php?page=post&amp;id=<?= $post['id'] ?>">
-				Lire en entier ou ajouter un commentaire &nbsp; <i class="fas fa-pencil-alt"></i>
+				Ajouter un commentaire &nbsp; <i class="fas fa-pencil-alt"></i>
 			</a>
 		</p>
 	</div>

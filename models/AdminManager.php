@@ -24,6 +24,18 @@ class AdminManager extends Manager
 		return $this->_status;
 	}
 
+	public function checkLogin($pseudo, $pass)
+	{
+		$req = $this->_db->prepare('SELECT pseudo, pass FROM admin WHERE pseudo = ?');
+		$req->execute(array($pseudo));
+		$resultat = $req->fetch();
+		if (password_verify($pass, $resultat['pass'])) {
+			return $resultat;
+		} else {
+			return false;
+		}
+	}
+
 	public function getCategory()
 	{
 		$req = $this->_db->query('
@@ -118,19 +130,6 @@ class AdminManager extends Manager
 	{
 		$new = $this->_db->prepare('UPDATE blog SET categorie=?, title=?, post=? WHERE id=?');
 		$affectedLines = $new->execute(array($cat, $title, $post, $postId));
-		//UPDATE comment SET report = 0 WHERE id=?
 		return $affectedLines;
-	}
-
-	public function checkLogin($pseudo, $pass)
-	{
-		$req = $this->_db->prepare('SELECT pseudo, pass FROM admin WHERE pseudo = ?');
-		$req->execute(array($pseudo));
-		$resultat = $req->fetch();
-		if (password_verify($pass, $resultat['pass'])) {
-			return $resultat;
-		} else {
-			return false;
-		}
 	}
 }
